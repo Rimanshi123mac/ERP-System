@@ -1,0 +1,59 @@
+{% extends "layouts/admin_base.html" %}
+
+{% block page_title %}Ticket #{{ ticket.id }}{% endblock %}
+
+{% block head_extra %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='crm_ticket_details.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="crm-page">
+
+  <div class="crm-detail-card theme-{{ user_prefs.theme or 'light' }}">
+    
+    <h2 class="ticket-title">Ticket #{{ ticket.id }}</h2>
+
+    <div class="ticket-info">
+      <p><strong>Issue:</strong> {{ ticket.issue }}</p>
+      <p><strong>Status:</strong> {{ ticket.status }}</p>
+      <p><strong>Submitted By:</strong> {{ ticket.name }} ({{ ticket.email }})</p>
+      <p><strong>Details:</strong> {{ ticket.details }}</p>
+      <p><strong>Created:</strong> {{ ticket.created_at }}</p>
+    </div>
+
+    <form action="/admin/crm/ticket/update/{{ ticket.id }}" method="POST" class="ticket-form">
+
+      {% if session.get('csrf_token') %}
+        <input type="hidden" name="csrf_token" value="{{ session['csrf_token'] }}">
+      {% endif %}
+
+      <div class="crm-field">
+        <label class="crm-detail-label">Update Status</label>
+        <select name="status" class="crm-detail-select" required>
+          <option value="Viewed" {% if ticket.status == 'Viewed' %}selected{% endif %}>Viewed</option>
+          <option value="In Progress" {% if ticket.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+          <option value="Resolved" {% if ticket.status == 'Resolved' %}selected{% endif %}>Resolved</option>
+          <option value="Closed" {% if ticket.status == 'Closed' %}selected{% endif %}>Closed</option>
+        </select>
+      </div>
+
+      <div class="crm-field">
+        <label class="crm-detail-label">Admin Remark</label>
+        <textarea 
+          name="admin_remark" 
+          class="crm-detail-note" 
+          placeholder="Add your remarks here...">{{ ticket.admin_remark or '' }}</textarea>
+      </div>
+
+      <button class="crm-btn crm-btn-primary" type="submit">
+        Update Ticket
+      </button>
+
+    </form>
+
+    <a href="{{ url_for('view_ticket') }}" class="crm-back-link">⬅ Back to Tickets</a>
+
+  </div>
+
+</div>
+{% endblock %}

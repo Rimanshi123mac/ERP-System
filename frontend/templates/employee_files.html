@@ -1,0 +1,137 @@
+{% extends "layouts/employee_base.html" %}
+{% block page_title %}Files{% endblock %}
+
+{% block content %}
+<div class="files-wrapper page-center">
+
+  
+  <div class="files-header">
+    <input type="text" class="files-search" placeholder="Search">
+
+    {% if perm.can_upload %}
+<button class="fab-btn" onclick="openUploadModal()">
+  <i class="bi bi-plus-lg"></i>
+</button>
+{% endif %}
+  </div>
+
+  <div class="table-container">
+    <table class="crm-table">
+
+      <thead>
+        <tr>
+          <th>
+            <span class="th-flex">
+              <strong>#</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span>
+          </th>
+
+          <th>
+            <span class="th-flex">
+              <strong>Desc</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span>
+          </th>
+
+          <th>
+            <span class="th-flex">
+              <strong>File Name</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span>
+          </th>
+
+          <th>
+            <span class="th-flex">
+              <strong>Uploaded By</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span>
+          </th>
+
+          <th class="text-center"><strong>Actions</strong></th>
+        </tr>
+      </thead>
+
+      <tbody>
+      {% for f in files %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ f.description }}</td>
+          <td class="file-name-text">{{ f.filename }}</td>
+          <td>{{ f.uploaded_by }}</td>
+
+          <td class="actions text-center">
+            {% if perm.can_download %}
+              <a href="{{ url_for('download_file', filename=f.filename) }}" title="Download">
+                <i class="bi bi-download"></i>
+              </a>
+            {% endif %}
+
+            {% if perm.can_delete %}
+              <form method="POST"
+                    action="{{ url_for('employee_delete_file', filename=f.filename) }}"
+                    style="display:inline;"
+                    onsubmit="return confirm('Delete this file permanently?');">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                <button class="icon-btn">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+
+    </table>
+
+    <div class="pagination-bar">
+      Rows per page:
+      <select disabled>
+        <option>50</option>
+      </select>
+      <span>1-{{ files|length }} of {{ files|length }}</span>
+      <span class="pagination-arrows">◀ ▶</span>
+    </div>
+
+
+  </div>
+
+</div>
+
+{% if perm.can_upload %}
+<div class="upload-modal" id="uploadModal">
+  <div class="upload-box">
+    <h3>Add Files <span onclick="closeUploadModal()">×</span></h3>
+
+    <form method="POST"
+          action="{{ url_for('employee_upload_file') }}"
+          enctype="multipart/form-data">
+
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+      <label>Select File</label>
+      <input type="file" name="file" required>
+
+      <label>Description</label>
+      <textarea name="desc" placeholder="Enter description" required></textarea>
+
+      <button type="submit" class="upload-btn">Upload</button>
+    </form>
+  </div>
+</div>
+{% endif %}
+
+<script>
+function openUploadModal() {
+  document.getElementById("uploadModal").style.display = "flex";
+}
+function closeUploadModal() {
+  document.getElementById("uploadModal").style.display = "none";
+}
+</script>
+{% endblock %}

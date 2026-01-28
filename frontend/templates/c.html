@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='client.css') }}">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+  <!-- <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script> -->
+</head>
+
+<body>
+
+  {% set features = features or {} %}
+  {% set raise_ticket_enabled = features.get('raise_ticket', False) %}
+  {% set view_meetings_enabled = features.get('view_meetings', False) %}
+
+  <div class="client-container">
+
+    <div class="topbar">
+
+        <div class="topbar-left">
+        
+            <span class="page-title">
+                {% if current_page == "home" %} Home
+                {% elif current_page == "profile" %} Profile
+                {% elif request.endpoint == "client_meetings" %} Meetings
+                {% elif request.endpoint == "client_file_page" %} Files
+                {% elif request.endpoint == "client_raise_ticket" %} Raise Ticket
+                {% endif %}
+            </span>
+
+        </div>
+
+        <div class="topbar-right">
+            <span class="username">Welcome, {{ client_name }}</span>
+            <i class="bi bi-bell notification-icon"></i>
+            <!-- <div class="profile-circle">{{ client_name[0] }}</div> -->
+            <div class="profile-dropdown">
+                <button class="profile-btn">
+                    {{ client_name[0] }}
+                </button>
+
+                <div class="profile-menu" id="profileMenu">
+                    <a href="{{ url_for('client_profile') }}">Profile</a>
+                    <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+                </div>
+            </div>
+
+
+        </div>
+        
+    </div>
+  
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+          <img src="{{ url_for('static', filename='images/N_logo.png') }}" alt="Logo">
+      </div>
+
+      <ul class="menu">
+
+          <li class="menu-item {% if request.endpoint == 'client_dashboard' %}{% endif %}">
+              <a href="{{ url_for('client_dashboard', id=session['user_id']) }}">
+                  <i class="fas fa-home"></i>
+                  <span>Home</span>
+              </a>
+          </li>
+
+          <li class="menu-item {% if current_page == 'profile' %}{% endif %}">
+    <a href="{{ url_for('client_profile') }}">
+        <i class="bi bi-person-circle"></i>
+        <span>Profile</span>
+    </a>
+</li>
+
+
+
+          {% if features.get('raise_ticket') %}
+          <li class="menu-item {% if request.endpoint == 'client_raise_ticket' %}{% endif %}">
+              <a href="{{ url_for('client_raise_ticket') }}">
+                  <i class="bi bi-ticket-detailed"></i>
+                  <span>Raise Ticket</span>
+              </a>
+          </li>
+          {% endif %}
+
+          {% if features.get('view_meetings') %}
+          <li class="menu-item {% if request.endpoint == 'client_meetings' %}{% endif %}">
+              <a href="{{ url_for('client_meetings') }}">
+                  <i class="bi bi-calendar-event"></i>
+                  <span>Meetings</span>
+              </a>
+          </li>
+          {% endif %}
+
+          {% if features.get('file_upload') %}
+          <li class="menu-item {% if request.endpoint == 'client_file_page' %}{% endif %}">
+              <a href="{{ url_for('client_file_page') }}">
+                  <i class="bi bi-folder2-open"></i>
+                  <span>Files</span>
+              </a>
+          </li>
+          {% endif %}
+
+          <li class="menu-item">
+              <a href="{{ url_for('logout') }}" class="logout-link">
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Logout</span>
+              </a>
+          </li>
+
+      </ul>
+    </aside>
+
+    <!-- <div class="content-wrapper">
+
+      <main class="client-form-container">
+
+        {% if profile %}
+
+          <div class="profile-card">
+              <h2>Your Profile</h2>
+
+              <p><strong>Address:</strong> {{ profile.address }}</p>
+              <p><strong>Contact:</strong> {{ profile.contact }}</p>
+              <p><strong>Selected Service:</strong> {{ profile.service }}</p>
+
+              <a href="{{ url_for('edit_client_profile', user_id=session['user_id']) }}"
+                class="btn-save" style="margin-top:20px;">Edit Profile</a>
+          </div>
+
+        {% else %}
+
+          <h2>Complete Your Profile</h2>
+
+          <form id="clientForm" data-user-id="{{ session['user_id'] }}">
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input type="text" id="address" name="address" placeholder="Enter your address" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact">Contact Number</label>
+              <input type="tel" id="contact" name="contact" placeholder="Enter your contact number" required>
+            </div>
+
+            <div class="form-group">
+              <label for="service">Select Service</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select your service</option>
+                <option value="web">Web Development</option>
+                <option value="app">App Development</option>
+                <option value="cloud">Cloud Integration</option>
+                <option value="ai">AI & Data Solutions</option>
+                <option value="marketing">Digital Marketing</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-save">Save Details</button>
+          </form>
+
+        {% endif %}
+
+      </main>
+
+      <footer>
+        Copyright © 2025 
+        <a href="https://nishgrid.com" target="_blank"> NishGrid Technologies</a> | Client Dashboard
+      </footer>
+
+    </div> -->
+
+    <div class="content-wrapper">
+
+    {% if current_page == "home" %}
+        <!-- WELCOME PAGE -->
+        <!-- <div class="home-center">
+            <h1 class="welcome-title">
+                Welcome to <span>NishGrid</span>
+            </h1>
+        </div> -->
+
+        <div class="home-center">
+          <img src="{{ url_for('static', filename='images/N_logo.png') }}" class="big-logo">
+          
+          <h1 class="welcome-title">
+              Welcome to <span>NishGrid</span>
+          </h1>
+      </div>
+
+
+
+    <!-- {% elif current_page == "profile" %}
+        
+        <main class="client-form-container">
+
+            {% if profile %}
+                <div class="profile-card">
+                    <h2>Your Profile</h2>
+                    <p><strong>Address:</strong> {{ profile.address }}</p>
+                    <p><strong>Contact:</strong> {{ profile.contact }}</p>
+                    <p><strong>Selected Service:</strong> {{ profile.service }}</p>
+
+                    <a href="{{ url_for('edit_client_profile', user_id=session['user_id']) }}"
+                       class="btn-save" style="margin-top:20px;">
+                       Edit Profile
+                    </a>
+                </div>
+            {% else %}
+                <h2>Complete Your Profile</h2>
+
+                <form id="clientForm" data-user-id="{{ session['user_id'] }}">
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" name="address" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <input type="tel" name="contact" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Service</label>
+                        <select name="service" required>
+                            <option value="" disabled selected>Select your service</option>
+                            <option value="web">Web Development</option>
+                            <option value="app">App Development</option>
+                            <option value="cloud">Cloud Integration</option>
+                            <option value="ai">AI & Data Solutions</option>
+                            <option value="marketing">Digital Marketing</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-save">Save Details</button>
+                </form>
+            {% endif %}
+        </main>
+
+    {% endif %} -->
+
+
+{% elif current_page == "profile" %}
+
+<main class="profile-page">
+
+  <!-- PROFILE HEADER -->
+  <div class="profile-header">
+    <div class="profile-avatar">
+      {{ client_name[0] }}
+    </div>
+
+    <div class="profile-header-info">
+      <h2>{{ client_name }}</h2>
+      <p>Client Profile</p>
+    </div>
+  </div>
+
+  <!-- PROFILE TABS -->
+  <div class="profile-tabs">
+    <button class="tab active">General</button>
+    <button class="tab disabled">Appearance</button>
+    <button class="tab disabled">Change Password</button>
+  </div>
+
+  <!-- PROFILE FORM CARD -->
+  <div class="profile-card-outer">
+
+    <form id="clientForm" data-user-id="{{ session['user_id'] }}">
+
+      <div class="form-row">
+        <label>Name</label>
+        <input type="text" value="{{ client_name }}" disabled>
+      </div>
+
+      <div class="form-row">
+        <label>Address</label>
+        <input
+          type="text"
+          id="address"
+          value="{{ profile.address if profile else '' }}"
+          required
+        >
+      </div>
+
+      <div class="form-row">
+        <label>Contact</label>
+        <input
+          type="tel"
+          id="contact"
+          value="{{ profile.contact if profile else '' }}"
+          required
+        >
+      </div>
+
+      <div class="form-row">
+        <label>Service</label>
+        <select id="service" required>
+          <option value="">Select service</option>
+          <option value="web" {% if profile and profile.service == 'web' %}selected{% endif %}>Web Development</option>
+          <option value="app" {% if profile and profile.service == 'app' %}selected{% endif %}>App Development</option>
+          <option value="cloud" {% if profile and profile.service == 'cloud' %}selected{% endif %}>Cloud Integration</option>
+          <option value="ai" {% if profile and profile.service == 'ai' %}selected{% endif %}>AI Solutions</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-save">
+        Save Changes
+      </button>
+
+    </form>
+
+  </div>
+
+</main>
+
+{% endif %}
+
+
+
+</div>
+
+  </div>
+
+<script src="{{ url_for('static', filename='script/client.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+/* .main-wrapper.theme-light {
+  --card-bg: #ffffff;
+  --card-border: #d0dae4;
+  --card-text: #111;
+  --card-shadow: rgba(0,0,0,0.1);
+  --input-bg: #fafafa;
+}
+
+.main-wrapper.theme-dark {
+  --card-bg: #1f1f1f;
+  --card-border: #333;
+  --card-text: #efefef;
+  --card-shadow: rgba(0,0,0,0.6);
+  --input-bg: #2a2a2a;
+}
+
+.main-wrapper.theme-aqua {
+  --card-bg: #e8fcff;
+  --card-border: #98e5ff;
+  --card-text: #03485a;
+  --card-shadow: rgba(0,120,150,0.25);
+  --input-bg: #f0fdff;
+}
+
+.main-wrapper.theme-green {
+  --card-bg: #eafff1;
+  --card-border: #7ed9a3;
+  --card-text: #064d26;
+  --card-shadow: rgba(0,150,80,0.25);
+  --input-bg: #f0fff5;
+}
+
+
+body.theme-light {
+  --card-bg: #ffffff;
+  --card-border: #d0dae4;
+  --card-text: #111;
+  --card-shadow: rgba(0,0,0,0.1);
+  --input-bg: #fafafa;
+}
+
+body.theme-dark {
+  --card-bg: #1f1f1f;
+  --card-border: #333;
+  --card-text: #efefef;
+  --card-shadow: rgba(0,0,0,0.6);
+  --input-bg: #2a2a2a;
+}
+
+body.theme-aqua {
+  --card-bg: #e8fcff;
+  --card-border: #98e5ff;
+  --card-text: #03485a;
+  --card-shadow: rgba(0,120,150,0.25);
+  --input-bg: #f0fdff;
+}
+
+body.theme-green {
+  --card-bg: #eafff1;
+  --card-border: #7ed9a3;
+  --card-text: #064d26;
+  --card-shadow: rgba(0,150,80,0.25);
+  --input-bg: #f0fff5;
+} */
+
+
+
+/* ================================================================
+   COMPLETE THEME.CSS - WITH .crm-detail-card SUPPORT
+   Fixes theme support for ALL pages including raised tickets
+================================================================ */
+
+/* MAIN WRAPPER THEMES */
+.main-wrapper.theme-light {
+  --card-bg: #ffffff;
+  --card-border: #d0dae4;
+  --card-text: #111;
+  --card-shadow: rgba(0,0,0,0.1);
+  --input-bg: #fafafa;
+}
+
+.main-wrapper.theme-dark {
+  --card-bg: #1f1f1f;
+  --card-border: #333;
+  --card-text: #efefef;
+  --card-shadow: rgba(0,0,0,0.6);
+  --input-bg: #2a2a2a;
+}
+
+.main-wrapper.theme-aqua {
+  --card-bg: #e8fcff;
+  --card-border: #98e5ff;
+  --card-text: #03485a;
+  --card-shadow: rgba(0,120,150,0.25);
+  --input-bg: #f0fdff;
+}
+
+.main-wrapper.theme-green {
+  --card-bg: #eafff1;
+  --card-border: #7ed9a3;
+  --card-text: #064d26;
+  --card-shadow: rgba(0,150,80,0.25);
+  --input-bg: #f0fff5;
+}
+
+/* BODY THEMES */
+body.theme-light {
+  --card-bg: #ffffff;
+  --card-border: #d0dae4;
+  --card-text: #111;
+  --card-shadow: rgba(0,0,0,0.1);
+  --input-bg: #fafafa;
+}
+
+body.theme-dark {
+  --card-bg: #1f1f1f;
+  --card-border: #333;
+  --card-text: #efefef;
+  --card-shadow: rgba(0,0,0,0.6);
+  --input-bg: #2a2a2a;
+}
+
+body.theme-aqua {
+  --card-bg: #e8fcff;
+  --card-border: #98e5ff;
+  --card-text: #03485a;
+  --card-shadow: rgba(0,120,150,0.25);
+  --input-bg: #f0fdff;
+}
+
+body.theme-green {
+  --card-bg: #eafff1;
+  --card-border: #7ed9a3;
+  --card-text: #064d26;
+  --card-shadow: rgba(0,150,80,0.25);
+  --input-bg: #f0fff5;
+}
+
+/* ================================================================
+   CRM DETAIL CARD THEMES - FOR RAISED TICKETS PAGE
+   This was missing! These selectors are now added!
+================================================================ */
+
+/* Light Theme - CRM Detail Card */
+.crm-detail-card.theme-light {
+  --card-bg: #ffffff;
+  --card-border: #d0dae4;
+  --card-text: #111;
+  --card-shadow: rgba(0,0,0,0.1);
+  --input-bg: #fafafa;
+}
+
+/* Dark Theme - CRM Detail Card */
+.crm-detail-card.theme-dark {
+  --card-bg: #1f1f1f;
+  --card-border: #333;
+  --card-text: #efefef;
+  --card-shadow: rgba(0,0,0,0.6);
+  --input-bg: #2a2a2a;
+}
+
+/* Aqua Theme - CRM Detail Card */
+.crm-detail-card.theme-aqua {
+  --card-bg: #e8fcff;
+  --card-border: #98e5ff;
+  --card-text: #03485a;
+  --card-shadow: rgba(0,120,150,0.25);
+  --input-bg: #f0fdff;
+}
+
+/* Green Theme - CRM Detail Card */
+.crm-detail-card.theme-green {
+  --card-bg: #eafff1;
+  --card-border: #7ed9a3;
+  --card-text: #064d26;
+  --card-shadow: rgba(0,150,80,0.25);
+  --input-bg: #f0fff5;
+}
+
+/* ================================================================
+   GENERIC THEME SUPPORT (Fallback for other uses)
+================================================================ */
+
+.theme-light {
+  --card-bg: #ffffff;
+  --card-border: #d0dae4;
+  --card-text: #111;
+  --card-shadow: rgba(0,0,0,0.1);
+  --input-bg: #fafafa;
+}
+
+.theme-dark {
+  --card-bg: #1f1f1f;
+  --card-border: #333;
+  --card-text: #efefef;
+  --card-shadow: rgba(0,0,0,0.6);
+  --input-bg: #2a2a2a;
+}
+
+.theme-aqua {
+  --card-bg: #e8fcff;
+  --card-border: #98e5ff;
+  --card-text: #03485a;
+  --card-shadow: rgba(0,120,150,0.25);
+  --input-bg: #f0fdff;
+}
+
+.theme-green {
+  --card-bg: #eafff1;
+  --card-border: #7ed9a3;
+  --card-text: #064d26;
+  --card-shadow: rgba(0,150,80,0.25);
+  --input-bg: #f0fff5;
+}

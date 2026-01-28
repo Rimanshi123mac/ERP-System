@@ -1,0 +1,81 @@
+<div class="tickets-modal-content">
+  <h3>My Tickets</h3>
+<div class="ticket-table-container">
+  <table class="ticket-table crm-table">
+    <thead>
+      <tr>
+        <th>
+          <span class="th-flex">
+              <strong>#</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+          </span>
+        </th>
+        <th><span class="th-flex">
+              <strong>Issue</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span>
+          </th>
+        <th><span class="th-flex">
+              <strong>Status</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span>
+          </th>
+        <th><span class="th-flex">
+              <strong>Created</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span></th>
+        <th><span class="th-flex">
+              <strong>Updated</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for t in tickets %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ t.issue }}</td>
+        <td>
+    {% if t.status == 'Open' %}
+        <span class="status-badge status-new">Not Viewed</span>
+    {% elif t.status == 'Viewed' %}
+        <span class="status-badge status-viewed">Viewed</span>
+    {% elif t.status == 'In Progress' %}
+        <span class="status-badge status-progress">In Progress</span>
+    {% elif t.status == 'Resolved' %}
+        <span class="status-badge status-resolved">Resolved</span>
+    {% elif t.status == 'Closed' %}
+        <span class="status-badge status-closed">Closed</span>
+    {% else %}
+        <span class="status-badge status-open">Open</span>
+    {% endif %}
+</td>
+
+       <td>{{ t.created_at }}</td>
+        <td>{{ t.updated_at or '-' }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5" style="text-align:center;">
+          No tickets raised yet.
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+   <div class="pagination-bar">
+      Rows per page:
+      <select disabled>
+        <option>50</option>
+      </select>
+      <span>1-{{ files|length }} of {{ files|length }}</span>
+      <span class="pagination-arrows">◀ ▶</span>
+    </div>
+</div>
+</div>

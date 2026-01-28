@@ -1,0 +1,238 @@
+/* ================= EMPLOYEE MEETINGS PAGE CSS ================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+  color: #2c3e50;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.mt-5 {
+  margin-top: 3rem;
+}
+
+/* ================= PAGE TITLE ================= */
+.title {
+  color: #1e3a5f;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #d4a574 0%, #b8935f 100%);
+  border-radius: 2px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: #6c757d !important;
+  font-size: 1.1rem;
+  margin-top: 2rem;
+}
+
+/* ================= GRID LAYOUT ================= */
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.col-md-4 {
+  display: flex;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+/* ================= MEETING CARD STYLING ================= */
+.meeting-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transition: all 0.4s ease;
+  width: 100%;
+  border-left: 4px solid #2c5f8d;
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Stagger animation for cards */
+.meeting-card:nth-child(1) { animation-delay: 0.1s; }
+.meeting-card:nth-child(2) { animation-delay: 0.2s; }
+.meeting-card:nth-child(3) { animation-delay: 0.3s; }
+.meeting-card:nth-child(4) { animation-delay: 0.4s; }
+.meeting-card:nth-child(5) { animation-delay: 0.5s; }
+.meeting-card:nth-child(6) { animation-delay: 0.6s; }
+
+.meeting-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  border-left-color: #d4a574;
+}
+
+.meeting-card h5 {
+  color: #1e3a5f;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.meeting-card p {
+  color: #495057;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.meeting-card p strong {
+  color: #2c3e50;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 100px;
+}
+
+/* ================= BADGE STYLING ================= */
+.badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-top: 0.3rem;
+}
+
+.badge-upcoming {
+  background: linear-gradient(135deg, #2c5f8d 0%, #1e3a5f 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(44, 95, 141, 0.3);
+}
+
+.badge-done {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.badge-cancel {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+/* ================= REMARKS SECTION ================= */
+.meeting-card p:last-child {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  border-left: 3px solid #d4a574;
+  margin-bottom: 0;
+}
+
+/* ================= EMPTY STATE ================= */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  margin-top: 2rem;
+}
+
+.empty-state h4 {
+  color: #1e3a5f;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.empty-state p {
+  color: #6c757d;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= RESPONSIVE DESIGN ================= */
+@media (max-width: 992px) {
+  .row {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.6rem;
+  }
+  
+  .container {
+    padding: 2rem 1rem;
+  }
+  
+  .row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .meeting-card {
+    padding: 1.5rem;
+  }
+  
+  .meeting-card h5 {
+    font-size: 1.1rem;
+  }
+  
+  .meeting-card p strong {
+    min-width: 80px;
+  }
+}

@@ -1,0 +1,57 @@
+/* :root {
+  --bg-color: #9ad9de;
+  --card-bg: #ffffff;
+  --primary: #1e88e5;
+  --text-color: #083344;
+  --font-family: Arial, sans-serif;
+  --font-size: 16px;
+}
+
+body {
+  background: var(--bg-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+} */
+
+
+
+:root {
+  --bg-color: #f5f7fa;        /* page background */
+  --card-bg: #ffffff;        /* cards/tables */
+  --primary: #1e88e5;        /* buttons / highlights */
+  --text-color: #083344;     /* main text */
+  --header-bg: #1f2a44;      /* top bars */
+  --table-head: #0b3a4a;     /* table header */
+  --sidebar-bg: #1e2f5c;
+
+  --font-family: Arial, sans-serif;
+  --font-size: 16px;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121826;
+  --card-bg: #1c2433;
+  --primary: #7c8cff;
+  --text-color: #e5e7eb;
+  --header-bg: #0d1220;
+  --table-head: #081f2a;
+  --sidebar-bg: #0b1020;
+}
+
+[data-theme="aqua"] {
+  --bg-color: #9ad9de;     /* your original aqua */
+  --card-bg: #e9fbfd;
+  --primary: #00acc1;
+  --text-color: #083344;
+  --header-bg: #1e6f78;
+  --table-head: #1e6f78;
+  --sidebar-bg: #145a63;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  transition: background 0.3s ease, color 0.3s ease;
+}

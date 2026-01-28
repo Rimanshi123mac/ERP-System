@@ -1,0 +1,390 @@
+{# ============================================= #}
+{# ADMIN USER PROFILE TEMPLATE (FIXED VERSION) #}
+{# ============================================= #}
+
+{% extends "layouts/admin_base.html" %}
+
+{% block page_title %}User Profile{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='admin_user_profile_view.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<meta name="csrf-token" content="{{ csrf_token }}">
+
+<div class="profile-container-wrapper">
+  <div class="card profile-card shadow-lg border-0 rounded-3">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">User Profile</h3>
+    </div>
+
+  <div class="profile-info mb-3">
+  <div><strong>Full Name:</strong> {{ user.fullname }}</div>
+  <div><strong>Username:</strong> {{ user.username }}</div>
+  <div><strong>Email:</strong> {{ user.email }}</div>
+  <div><strong>Role:</strong> {{ user.role }}</div>
+  <div><strong>Account Created:</strong> {{ user.created_at }}</div>
+  <div><strong>Email Verified:</strong> {{ "Yes" if user.is_verified else "No" }}</div>
+  <div><strong>Approved:</strong> {{ "Yes" if user.is_approved else "No" }}</div>
+  <div><strong>Status:</strong>
+    {% if user.is_active %}
+      <span class="badge bg-success">Active</span>
+    {% else %}
+      <span class="badge bg-danger">Deactivated</span>
+    {% endif %}
+  </div>
+</div>
+
+
+<h4 class="section-title">Feature Access Control</h4>
+
+<div class="feature-section feature-card">
+
+  {# ====================== #}
+  {# DASHBOARD (ALL USERS) #}
+  {# ====================== #}
+  <div class="feature-row">
+    <span class="feature-name">Dashboard</span>
+    <span class="badge state-badge {{ 'bg-success' if features.dashboard else 'bg-danger' }}">
+      {{ 'Enabled' if features.dashboard else 'Disabled' }}
+    </span>
+    <button class="toggle-btn"
+      onclick="toggleFeature(event,'{{ user.id }}','dashboard')">
+      {{ 'Disable' if features.dashboard else 'Enable' }}
+    </button>
+  </div>
+
+  {# ====================== #}
+  {# VIEW MEETINGS (ALL USERS) #}
+  {# ====================== #}
+  <div class="feature-row">
+    <span class="feature-name">View Meetings</span>
+    <span class="badge state-badge {{ 'bg-success' if features.view_meetings else 'bg-danger' }}">
+      {{ 'Enabled' if features.view_meetings else 'Disabled' }}
+    </span>
+    <button class="toggle-btn"
+      onclick="toggleFeature(event,'{{ user.id }}','view_meetings')">
+      {{ 'Disable' if features.view_meetings else 'Enable' }}
+    </button>
+  </div>
+
+  {# ========================== #}
+  {# CLIENT APP (CLIENT ONLY) #}
+  {# ========================== #}
+  {% if user.role == 'client' %}
+  <div class="feature-row">
+    <span class="feature-name">Client App</span>
+    <span class="badge state-badge {{ 'bg-success' if features.client_app else 'bg-danger' }}">
+      {{ 'Enabled' if features.client_app else 'Disabled' }}
+    </span>
+    <button class="toggle-btn"
+      onclick="toggleFeature(event,'{{ user.id }}','client_app')">
+      {{ 'Disable' if features.client_app else 'Enable' }}
+    </button>
+    <span class="dropdown-icon" onclick="toggleDropdown('client_app_dropdown')">▾</span>
+  </div>
+  <div id="client_app_dropdown" class="dropdown-panel">
+     <a href="{{ url_for('admin_user_client_app_access', uid=user.id) }}" class="manage-link">
+        Manage Client App Access
+     </a>
+  </div>
+  {% endif %}
+
+  {# =========================== #}
+  {# CORE DATA (EMPLOYEE ONLY) #}
+  {# =========================== #}
+  {% if user.role == 'employee' %}
+  <div class="feature-row">
+    <span class="feature-name">Core Data</span>
+    <span class="badge state-badge {{ 'bg-success' if features.core_data else 'bg-danger' }}">
+      {{ 'Enabled' if features.core_data else 'Disabled' }}
+    </span>
+    <button class="toggle-btn"
+      onclick="toggleFeature(event,'{{ user.id }}','core_data')">
+      {{ 'Disable' if features.core_data else 'Enable' }}
+    </button>
+    <span class="dropdown-icon" onclick="toggleDropdown('core_data_dropdown')">▾</span>
+  </div>
+  <div id="core_data_dropdown" class="dropdown-panel">
+     <a href="{{ url_for('admin_user_core_data_access', uid=user.id) }}" class="manage-link">
+        Manage Core Data Access
+     </a>
+  </div>
+  {% endif %}
+
+  {# ========================== #}
+  {# FILE VIEW/DOWNLOAD (ALL USERS) #}
+  {# ========================== #}
+  <div class="feature-row">
+    <span class="feature-name">File View/Download</span>
+    <span class="badge state-badge {{ 'bg-success' if features.file_upload else 'bg-danger' }}">
+      {{ 'Enabled' if features.file_upload else 'Disabled' }}
+    </span>
+    <button class="toggle-btn"
+      onclick="toggleFeature(event,'{{ user.id }}','file_upload')">
+      {{ 'Disable' if features.file_upload else 'Enable' }}
+    </button>
+    <span class="dropdown-icon" onclick="toggleDropdown('file_upload_dropdown')">▾</span>
+  </div>
+  <div id="file_upload_dropdown" class="dropdown-panel">
+    <a href="{{ url_for('admin_user_file_access', user_id=user.id) }}" class="manage-link">
+      Manage File Access
+    </a>
+  </div>
+
+  {# ========================== #}
+  {# TICKETS (CLIENT & EMPLOYEE) #}
+  {# ========================== #}
+  {% if user.role in ['client', 'employee'] %}
+  <div class="feature-row">
+    <span class="feature-name">Tickets</span>
+    <span class="badge state-badge {{ 'bg-success' if features.raise_ticket else 'bg-danger' }}">
+      {{ 'Enabled' if features.raise_ticket else 'Disabled' }}
+    </span>
+    <button class="toggle-btn"
+            onclick="toggleFeature(event,'{{ user.id }}','raise_ticket')">
+      {{ 'Disable' if features.raise_ticket else 'Enable' }}
+    </button>
+  </div>
+  {% endif %}
+
+</div>
+
+{# ========================== #}
+{# EMPLOYEE CLIENT ASSIGNMENT SECTION #}
+{# ========================== #}
+{% if user.role == 'employee' %}
+<h4 class="section-title" style="margin-top: 30px;">Assigned Clients</h4>
+<div class="feature-section">
+  <div class="mb-3">
+    <label for="clientSelect" class="form-label" style="display: block; margin-bottom: 8px; font-weight: 600;">Assign Client to Employee:</label>
+    <div style="display: flex; gap: 10px; align-items: flex-end;">
+      <select id="clientSelect" class="form-control" style="flex: 1; padding: 8px 12px; border-radius: 6px; border: 1px solid #dce3f5;">
+        <option value="">Select a client...</option>
+        {% for client in all_clients_list %}
+          <option value="{{ client.username }}" data-client-id="{{ client.id }}">
+            {{ client.fullname }} ({{ client.username }}) - {{ client.email }}
+          </option>
+        {% endfor %}
+      </select>
+      <button class="btn btn-primary btn-sm" onclick="assignClientToEmployee('{{ user.id }}', '{{ user.username }}')" style="padding: 8px 16px; border-radius: 6px; border: none; background: #0d6efd; color: white; cursor: pointer;">
+        Assign Client
+      </button>
+    </div>
+  </div>
+
+  <div class="assigned-clients-list" style="margin-top: 15px;">
+    {% if assigned_clients %}
+      {% for client in assigned_clients %}
+      <div class="assigned-client-item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px; margin-bottom: 10px; background: #f8f9fa; border-radius: 8px; border: 1px solid #e2e7f3;">
+        <div>
+          <strong style="display: block; margin-bottom: 4px;">{{ client.fullname }}</strong>
+          <small style="color: #6c757d; font-size: 13px;">{{ client.client_username }} - {{ client.email }}</small>
+        </div>
+        <button class="btn btn-danger btn-sm" 
+                onclick="removeClientFromEmployee('{{ user.id }}', '{{ user.username }}', '{{ client.client_username }}')"
+                style="padding: 6px 12px; border-radius: 6px; border: none; background: #dc3545; color: white; cursor: pointer; font-size: 13px;">
+          Remove
+        </button>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div style="padding: 12px; background: #e7f3ff; border-radius: 8px; border: 1px dashed #b3d9ff; text-align: center; color: #0066cc;">
+        No clients assigned to this employee yet.
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+{# ========================== #}
+{# CLIENT SOFTWARE SECTION  #}
+{# ========================== #}
+<div class="footer-actions">
+  <a href="{{ url_for('admin_rights') }}" class="btn btn-secondary">Back</a>
+  <button class="btn {{ 'btn-danger' if user.is_active else 'btn-success' }}"
+        id="userStatusBtn"
+        data-user-id="{{ user.id }}"
+        onclick="toggleUserStatus(event)">
+    {{ 'Deactivate' if user.is_active else 'Activate' }}
+  </button>
+</div>
+
+</div>
+</div>
+
+<script src="{{ url_for('static', filename='script/csrf_helper.js') }}"></script>
+
+{# ============== JS REMAINS SAME ============= #}
+
+<script>
+function toggleDropdown(id) {
+    event.stopPropagation();
+    const e = document.getElementById(id);
+    e.style.display = e.style.display === "block" ? "none" : "block";
+}
+
+async function toggleFeature(evt, userId, feature) {
+    evt.stopPropagation();
+    
+    const btn = evt.target;
+    const currentState = btn.innerText.trim();
+
+    btn.disabled = true;
+    btn.innerText = "...";
+
+    try {
+        const res = await fetch("/admin/toggle_feature", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ uid: userId, feature: feature })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+
+            btn.innerText = data.new_state ? "Disable" : "Enable";
+            btn.classList.toggle("btn-success", !data.new_state);
+            btn.classList.toggle("btn-warning", data.new_state);
+
+            const badge = btn.closest(".feature-row").querySelector(".state-badge");
+            if (badge) {
+                badge.innerText = data.new_state ? "Enabled" : "Disabled";
+                badge.classList.remove("bg-success", "bg-danger");
+                badge.classList.add(data.new_state ? "bg-success" : "bg-danger");
+            }
+
+        } else {
+            alert("Error: " + (data.error || "Unknown error"));
+            btn.innerText = currentState;
+        }
+
+    } catch (err) {
+        alert("Request failed: " + err.message);
+        btn.innerText = "Retry";
+    }
+
+    btn.disabled = false;
+}
+
+async function toggleUserStatus(e) {
+    const btn = e.target;
+    const userId = btn.dataset.userId;
+
+    btn.disabled = true;
+    btn.innerText = "...";
+
+    try {
+        const res = await fetch(`/api/toggle_user_status/${userId}`, {
+            method: "POST",
+            headers: {
+                "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+            }
+        });
+
+        const data = await res.json();
+        if (data.success) {
+            location.reload();
+        } else {
+            btn.innerText = "Retry";
+            btn.disabled = false;
+            alert(data.error || "Failed");
+        }
+
+    } catch (err) {
+        btn.innerText = "Retry";
+        btn.disabled = false;
+        alert(err.message);
+    }
+}
+
+function toggleApp(evt, clientId, appId, allow) {
+    evt.stopPropagation();
+
+    if (typeof $ === "undefined") {
+        return alert("Error: jQuery not loaded!");
+    }
+
+    $.post('/admin/client-apps/' + (allow ? 'grant' : 'revoke'), 
+    { client_id: clientId, app_id: appId },
+    function () {
+        location.reload();
+    });
+}
+
+async function assignClientToEmployee(employeeId, employeeUsername) {
+    const select = document.getElementById('clientSelect');
+    const clientUsername = select.value;
+    
+    if (!clientUsername) {
+        alert('Please select a client');
+        return;
+    }
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    try {
+        const res = await fetch('/admin/assign-client-to-employee', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken
+            },
+            body: JSON.stringify({
+                employee_id: employeeId,
+                employee_username: employeeUsername,
+                client_username: clientUsername
+            })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+            location.reload();
+        } else {
+            alert('Error: ' + (data.error || 'Failed to assign client'));
+        }
+    } catch (err) {
+        alert('Request failed: ' + err.message);
+    }
+}
+
+async function removeClientFromEmployee(employeeId, employeeUsername, clientUsername) {
+    if (!confirm('Remove this client from employee?')) {
+        return;
+    }
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    try {
+        const res = await fetch('/admin/remove-client-from-employee', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken
+            },
+            body: JSON.stringify({
+                employee_id: employeeId,
+                employee_username: employeeUsername,
+                client_username: clientUsername
+            })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+            location.reload();
+        } else {
+            alert('Error: ' + (data.error || 'Failed to remove client'));
+        }
+    } catch (err) {
+        alert('Request failed: ' + err.message);
+    }
+}
+</script>
+
+
+
+{% endblock %}

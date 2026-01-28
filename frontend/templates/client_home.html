@@ -1,0 +1,28 @@
+{% extends "layouts/client_base.html" %}
+
+<!-- {% block title %}Home{% endblock %} -->
+{% block page_title %}Home{% endblock %}
+{% block content %}
+<!-- <div class="home-wrapper">
+  <div class="home-center"></div>
+    <img src="{{ url_for('static', filename='images/N_logo.png') }}" class="big-logo">
+    <h1 class="welcome-title">
+      Welcome to <span>NishGrid</span>
+    </h1>
+  </div>
+</div> -->
+<div class="welcome-container">
+  <img src="{{ url_for('static', filename='images/N_logo.png') }}" 
+       alt="NishGrid Logo" 
+       class="welcome-logo">
+
+  <h1 class="welcome-text">
+    Welcome to <span>NishGrid</span>
+  </h1>
+
+  <p class="welcome-subtext">
+    Your smart ERP solution
+  </p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,99 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='client.css') }}">
+</head>
+
+<body>
+
+{% set features = features or {} %}
+
+<div class="client-container">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="page-title">Home</span>
+    </div>
+
+    <div class="topbar-right">
+      <span class="username">Welcome, {{ client_name }}</span>
+
+      <div class="profile-dropdown">
+        <button class="profile-btn">{{ client_name[0] }}</button>
+        <div class="profile-menu" id="profileMenu">
+          <a href="{{ url_for('client_profile') }}">Profile</a>
+          <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="{{ url_for('static', filename='images/N_logo.png') }}">
+    </div>
+
+    <ul class="menu">
+      <li class="menu-item active">
+       
+         <a href="{{ url_for('client_dashboard') }}">Home</a>
+
+      </li>
+
+      <li class="menu-item">
+        <a href="{{ url_for('client_profile') }}">Profile</a>
+      </li>
+
+      {% if features.get('raise_ticket') %}
+      <li class="menu-item">
+        <a href="{{ url_for('client_raise_ticket') }}">Raise Ticket</a>
+      </li>
+      {% endif %}
+
+      {% if features.get('view_meetings') %}
+      <li class="menu-item">
+        <a href="{{ url_for('client_meetings') }}">Meetings</a>
+      </li>
+      {% endif %}
+
+      <li class="menu-item">
+        <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+      </li>
+    </ul>
+  </aside> -->
+
+  <!-- CONTENT -->
+  <!-- <div class="content-wrapper">
+    <div class="home-center">
+      <img src="{{ url_for('static', filename='images/N_logo.png') }}" class="big-logo">
+      <h1 class="welcome-title">
+        Welcome to <span>NishGrid</span>
+      </h1>
+    </div>
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script/client.js') }}"></script>
+</body>
+</html> --> 
+
+
+
+<!-- 
+{% extends "layouts/client_base.html" %}
+
+{% block title %}Client Home{% endblock %}
+{% block page_title %}Home{% endblock %}
+
+{% block content %}
+<div class="home-center">
+  <img src="{{ url_for('static', filename='images/N_logo.png') }}" class="big-logo">
+  <h1 class="welcome-title">
+    Welcome to <span>NishGrid</span>
+  </h1>
+</div>
+{% endblock %} -->

@@ -1,0 +1,280 @@
+body {
+  background: #f6f7fb;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  max-width: 900px;
+}
+
+.card {
+  border-radius: 14px !important;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.10) !important;
+}
+
+/* Header */
+.card-header {
+  background: #04324d !important;
+  color: white !important;
+  padding: 14px 22px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Labels */
+.form-label {
+  font-size: 14px;
+  color: #1e293b;
+}
+
+/* Inputs */
+.form-control,
+.form-select {
+  border-radius: 8px;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.25);
+}
+
+/* Buttons */
+.btn-primary {
+  background: #0066cc !important;
+  border: none;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+.btn-primary:hover {
+  background: #004c99 !important;
+}
+
+.btn-secondary {
+  background: #64748b !important;
+  border: none;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+#message {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.user-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.user-card {
+  width: 900px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.user-header {
+  background: #04324d;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-form {
+  padding: 22px 26px;
+}
+
+.user-form .row {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.user-form .col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-form label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #1e293b;
+}
+
+.user-form input,
+.user-form select {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+}
+
+.user-form input:focus,
+.user-form select:focus {
+  border-color: #2196F3;
+  box-shadow: 0 0 0 3px rgba(33,150,243,0.25);
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn-primary-lg,
+.btn-secondary-lg {
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary-lg {
+  background: linear-gradient(135deg, #1976d2, #0d47a1);
+  color: white;
+}
+
+.btn-primary-lg:hover {
+  background: linear-gradient(135deg, #1565c0, #0d47a1);
+}
+
+.btn-secondary-lg {
+  background: #64748b;
+  color: white;
+}
+
+.btn-secondary-lg:hover {
+  background: #4b5563;
+}
+
+/* WRAPPER */
+.user-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.user-card {
+  width: 900px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  color: var(--card-text);
+}
+
+.user-header {
+  background: var(--table-header-bg, #073957);
+  color: var(--table-header-text, #fff);
+  font-size: 20px;
+  font-weight: 600;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-form {
+  padding: 22px 26px;
+}
+
+.user-form .row {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.user-form .col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* LABELS */
+.user-form label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--card-text);
+}
+
+/* INPUTS + SELECT */
+.user-form input,
+.user-form select {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+}
+
+.user-form input:focus,
+.user-form select:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.25);
+}
+
+/* ACTION BUTTONS */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn-secondary-lg,
+.btn-primary-lg {
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Reset Button */
+.btn-secondary-lg {
+  background: #64748b;
+  color: white;
+}
+
+.btn-secondary-lg:hover {
+  background: #4b5563;
+}
+
+/* Submit Button */
+.btn-primary-lg {
+  background: linear-gradient(135deg, #1976d2, #0d47a1);
+  color: white;
+}
+
+.btn-primary-lg:hover {
+  background: linear-gradient(135deg, #1565c0, #0d47a1);
+}
+/* ONLY DARK THEME: make header blue */
+.theme-dark .user-card .user-header {
+  background: #06344e !important;
+  color: #ffffff !important;
+}

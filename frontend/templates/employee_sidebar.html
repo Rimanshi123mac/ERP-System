@@ -1,0 +1,59 @@
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="{{ url_for('static', filename='images/N_logo.png') }}" alt="Logo">
+  </div>
+
+  <ul class="menu">
+    <li>
+      <a href="{{ url_for('employee_dashboard', user_id=session['user_id']) }}">
+        Dashboard
+      </a>
+    </li>
+
+    <!-- <li>
+      <a href="{{ url_for('employee_profile', user_id=session['user_id']) }}">
+        Profile
+      </a>
+    </li> -->
+
+    {% if features.get('view_meetings') %}
+        <li class="sidebar-dropdown">
+            <a href="{{ url_for('employee_crm') }}" class="dropdown-toggle" onclick="toggleEmployeeCRM(); ">
+                CRM ▾
+            </a>
+            <!-- <ul class="submenu" id="employeeCrmMenu" style="display: none;">
+                
+              <li><a href="{{ url_for('employee_crm_meetings') }}">Meetings</a></li>
+              <li><a href="{{ url_for('employee_add_meeting') }}">Add Meeting</a></li>
+              <li><a href="{{ url_for('employee_add_customer') }}">Add Customer</a></li>
+              
+            </ul> -->
+        </li>
+    {% endif %}
+
+
+    {% if features.get('file_upload') %}
+    <li>
+      <a href="{{ url_for('employee_files_home') }}">View Files</a>
+    </li>
+    {% endif %}
+
+    {% if features.get('core_data') %}
+    <li>
+      <a href="{{ url_for('employee_core_data') }}">Core Data</a>
+    </li>
+    {% endif %}
+
+    <!-- <li>
+      <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </li> -->
+  </ul>
+</aside>
+
+<script>
+function toggleEmployeeCRM() {
+    const menu = document.getElementById("employeeCrmMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+</script>
+

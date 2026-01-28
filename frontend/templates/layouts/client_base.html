@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Client Panel{% endblock %}</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='client_crm_meet.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='client_sidebar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='client_home.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='client_profile.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='client_raise_ticket.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='popup.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='tickets.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='client_files_table.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-icons/bootstrap-icons.css') }}">
+
+</head>
+
+<body class="client-layout theme-{{ session.get('theme', 'default') }}">
+
+
+<div class="layout">
+
+  {% include "client_sidebar.html" %}
+
+  <div class="main-wrapper"
+    data-theme="{{ client_theme }}"
+    data-font="{{ client_font }}"
+    data-size="{{ client_size }}"
+    data-bold="{{ client_bold }}">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <h2 class="page-title">
+          {% block page_title %}Home{% endblock %}
+        </h2>
+      </div>
+
+      <div class="topbar-right">
+        <span class="username">Welcome, {{ client_name }}</span>
+
+        <div class="profile-dropdown">
+          <button class="profile-btn" onclick="toggleProfileMenu()">
+            {{ client_name[0]|upper }}
+          </button>
+          <div class="profile-menu" id="profileMenu">
+            <a href="{{ url_for('client_profile') }}"><i class="bi bi-person"></i> Profile</a>
+            <!-- <a href="{{ url_for('logout') }}" class="logout">Logout</a> -->
+             <!-- <a href="javascript:void(0)" class="logout" onclick="confirmLogout()"></a> -->
+               <a href="{{ url_for('logout') }}"  onclick="confirmLogout()" class="logout"><i class="bi bi-box-arrow-right"></i>Logout</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== PAGE CONTENT ===== -->
+    <main class="main-content">
+      {% block content %}{% endblock %}
+    </main>
+
+  </div>
+</div>
+
+<!-- <div id="globalPopup" class="popup-overlay">
+  <div class="popup-box">
+    <button class="popup-close" id="popupClose">&times;</button>
+    <div class="popup-content" id="popupMessage">Message goes here</div>
+  </div>
+</div> -->
+
+<div id="globalPopup" class="popup-overlay">
+  <div class="popup-box">
+    <button class="popup-close" id="popupClose">&times;</button>
+    <div class="popup-content" id="popupMessage">Message goes here</div>
+
+    <div class="popup-actions" id="popupActions" style="display:none;">
+      <button class="btn-cancel" onclick="hidePopup()">Cancel</button>
+      <button class="btn-confirm" id="popupConfirmBtn">Logout</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+function toggleProfileMenu() {
+  document.getElementById("profileMenu").classList.toggle("show");
+}
+
+function openTickets() {
+  document.getElementById("ticketsModal").style.display = "flex";
+
+  fetch("{{ url_for('my_tickets') }}")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("ticketsContent").innerHTML = html;
+    });
+}
+
+function closeTickets() {
+  document.getElementById("ticketsModal").style.display = "none";
+}
+
+</script>
+
+<script src="{{ url_for('static', filename='script/client_theme.js') }}"></script>
+
+
+</body>
+</html>

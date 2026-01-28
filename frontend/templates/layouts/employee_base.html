@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Employee Panel{% endblock %}</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='employee_sidebar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='employee_dashboard.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='employee_files.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='employee_base_theme.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-icons/bootstrap-icons.css') }}">
+  {% block head_extra %}{% endblock %}
+</head>
+
+<body>
+
+<div class="layout">
+  {% include "employee_sidebar.html" %}
+
+  <div class="main-wrapper
+              theme-{{ user_prefs.theme|default('light') }}
+              {% if user_prefs.is_bold %}font-bold{% endif %}"
+       style="--font-family: {{ user_prefs.font_family }};
+              --font-size: {{ user_prefs.font_size }};">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <h2 class="page-title">{% block page_title %}Dashboard{% endblock %}</h2>
+      </div>
+
+      <div class="topbar-right">
+
+        <span class="username">
+          Welcome, {{ session.get('employee_name', session.get('fullname', 'Employee')) }}
+        </span>
+
+        <!-- PROFILE DROPDOWN -->
+        <div class="profile-wrapper">
+          <button class="profile-btn" onclick="toggleProfileMenu()">
+            {{ (session.get('employee_name', session.get('fullname', 'E')))[0]|upper }}
+          </button>
+
+          <div class="profile-menu" id="profileMenu">
+            <a href="{{ url_for('employee_profile', user_id=session['user_id']) }}">
+              <i class="bi bi-person"></i> Profile
+            </a>
+            
+                <a href="{{ url_for('logout') }}" onclick="confirmLogout()" class="logout">
+                  <i class="bi bi-box-arrow-right"></i>Logout
+                </a>
+              
+                    
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <main class="main-content">
+      {% block content %}{% endblock %}
+    </main>
+
+  </div>
+</div>
+
+<script>
+function toggleProfileMenu() {
+  document.getElementById("profileMenu").classList.toggle("show");
+}
+
+document.addEventListener("click", function(e) {
+  if (!e.target.closest(".profile-wrapper")) {
+    document.getElementById("profileMenu").classList.remove("show");
+  }
+});
+</script>
+
+</body>
+</html>

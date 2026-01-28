@@ -1,0 +1,222 @@
+{% extends "layouts/client_base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="client-profile-page">
+
+  <div class="profile-hero">
+    <!-- <div class="profile-header">
+      <div class="avatar-circle">{{ full_name[0]|upper }}</div>
+      <div class="header-text">
+        <h2 class="profile-name">{{ full_name }}</h2>
+        <p class="profile-subtitle">Client Profile</p>
+      </div>
+    </div> -->
+
+    <div class="profile-header">
+  <!-- <div class="avatar-wrapper">
+    <img
+      src="{{ profile.avatar_url or url_for('static', filename='images/default_avatar.png') }}"
+      alt="Avatar"
+      class="avatar-image"
+      id="avatarPreview"
+    >
+    <label for="avatarInput" class="avatar-plus">+</label>
+    <input type="file" id="avatarInput" accept="image/*" style="display:none">
+  </div> -->
+
+    <div class="avatar-wrapper">
+      <!-- <input type="file" id="avatarInput" accept="image/*" style="display:none"> -->
+      <img id="avatarPreview"
+          src="{{ avatar_url or url_for('static', filename='images/avatar.png') }}"
+          data-default="{{ url_for('static', filename='images/avatar.png') }}"
+          class="avatar-image">
+
+    <label for="avatarInput" class="avatar-plus">+</label>
+    <input type="file" id="avatarInput" accept="image/*" style="display:none">
+
+    <button type="button" class="avatar-remove" id="avatarRemove">&times;</button>
+  </div>
+
+
+  <div class="header-text">
+    <h2 class="profile-name">{{ full_name }}</h2>
+    <p class="profile-subtitle">Client Profile</p>
+  </div>
+</div>
+
+
+    <div class="profile-tabs">
+      <button class="tab active" data-tab="general">General</button>
+      <button class="tab" data-tab="appearance">Appearance</button>
+      <button class="tab" data-tab="password">Change Password</button>
+    </div>
+  </div>
+  
+  <div class="profile-card">
+
+    <div class="tab-content active" id="general">
+      <form onsubmit="saveClientProfile(event)">
+
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" id="full_name" value="{{ full_name }}" disabled>
+        </div>
+
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" id="address" value="{{ profile.address if profile }}">
+        </div>
+
+        <div class="form-group">
+          <label>Contact</label>
+          <input type="text" id="contact" value="{{ profile.contact if profile }}">
+        </div>
+
+        <div class="form-group">
+          <label>Service</label>
+          <select id="service">
+            <option value="">Select</option>
+            <option value="Web" {% if profile and profile.service=='Web' %}selected{% endif %}>Web</option>
+            <option value="App" {% if profile and profile.service=='App' %}selected{% endif %}>App</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary">Save Changes</button>
+      </form>
+    </div>
+<!-- 
+  <div class="tab-content" id="appearance">
+    <div class="appearance-preview">
+      <form onsubmit="saveAppearance(event)">
+          <h4 class="section-title">Theme</h4>
+          <div class="theme-options">
+            <span class="theme light" data-theme="light"></span>
+            <span class="theme dark" data-theme="dark"></span>
+            <span class="theme aqua" data-theme="aqua"></span>
+          </div>
+
+          <h4 class="section-title mt-24">Font Style</h4>
+          <div class="form-group-inline">
+            <select id="font_family">
+              <option value="Arial">Arial</option>
+              <option value="Poppins">Poppins</option>
+            </select>
+
+            <select id="font_size">
+              <option value="14px">14px</option>
+              <option value="16px">16px</option>
+              <option value="18px">18px</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-primary">Save Preferences</button>
+        </form>
+      </div>
+  </div> -->
+
+  <div class="tab-content" id="appearance">
+  <div class="appearance-preview">
+    
+    <h3 class="section-title">Theme</h3>
+    <div class="theme-options">
+      <div class="theme light" data-theme="light"></div>
+      <div class="theme dark" data-theme="dark"></div>
+      <div class="theme aqua" data-theme="aqua"></div>
+      <div class="theme green" data-theme="green"></div>
+    </div>
+
+    <h3 class="section-title mt-24">Font Style</h3>
+
+    <div class="form-group-inline">
+      <select id="fontFamily">
+        <option value="Poppins">Poppins</option>
+        <option value="Arial">Arial</option>
+        <option value="Inter">Inter</option>
+      </select>
+
+      <select id="fontSize">
+        <option value="14px">14px</option>
+        <option value="16px">16px</option>
+        <option value="18px">18px</option>
+      </select>
+
+      <div class="bold-toggle">
+        <label class="switch">
+          <input type="checkbox" id="boldToggle">
+          <span class="slider round"></span>
+        </label>
+        <span class="bold-label">Bold</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+    <!-- ===== PASSWORD ===== -->
+    <div class="tab-content" id="password">
+      <form onsubmit="changePassword(event)">
+
+        <!-- <div class="form-group">
+          <label>Current Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="current_password" required>
+            <button type="button" class="toggle-pass" onclick="togglePass('current_password', this)">Show</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>New Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="new_password" required>
+            <button type="button" class="toggle-pass" onclick="togglePass('new_password', this)">Show</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="confirm_password" required>
+            <button type="button" class="toggle-pass" onclick="togglePass('confirm_password', this)">Show</button>
+          </div>
+        </div> -->
+
+        <div class="form-group">
+  <label>Current Password</label>
+  <div class="password-wrapper">
+    <input type="password" id="current_password" required>
+    <span class="toggle-pass-text" onclick="togglePass('current_password', this)">Show</span>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>New Password</label>
+  <div class="password-wrapper">
+    <input type="password" id="new_password" required>
+    <span class="toggle-pass-text" onclick="togglePass('new_password', this)">Show</span>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>Confirm Password</label>
+  <div class="password-wrapper">
+    <input type="password" id="confirm_password" required>
+    <span class="toggle-pass-text" onclick="togglePass('confirm_password', this)">Show</span>
+  </div>
+</div>
+
+
+        <button type="submit" class="btn-primary">Update Password</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='script/client_profile.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='script/client_theme.js') }}"></script> -->
+
+{% endblock %}

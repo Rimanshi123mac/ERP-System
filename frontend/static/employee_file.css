@@ -1,0 +1,327 @@
+.files-wrapper {
+  padding: 24px;
+}
+
+.files-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.files-search {
+  background: #fff;
+  border-radius: 6px;
+  padding: 8px 12px;
+  width: 320px;
+  border: 1px solid #e5e7eb;
+}
+/* ================= TABLE CARD ================= */
+.files-table-card {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+
+.files-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ================= HEADER ================= */
+.files-table thead {
+  background: #04324d;
+  color: #ffffff;
+}
+
+.files-table thead th {
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.th-flex {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.th-flex i {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.bi-three-dots-vertical {
+  font-size: 16px;
+}
+
+/* ================= BODY ================= */
+.files-table td {
+  padding: 12px 14px;
+  font-size: 14px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.files-table tbody tr:nth-child(even) {
+  background: #f5f7f9;
+}
+
+.files-table tbody tr:hover {
+  background: #eef3f7;
+}
+
+/* ================= FILE NAME ================= */
+.file-name-text {
+  color: #111827;
+  font-weight: 500;
+}
+
+/* ================= ACTION ICONS ================= */
+.actions {
+  text-align: center;
+}
+
+.actions i {
+  font-size: 18px;
+  margin: 0 6px;
+  cursor: pointer;
+  color: #1e88e5;
+  transition: transform 0.2s ease;
+}
+
+.actions i.bi-trash {
+  color: #e53935;
+}
+
+.actions i:hover {
+  transform: scale(1.15);
+}
+
+/* ================= DOWNLOAD BUTTON ================= */
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  background: #1e88e5;
+  color: #ffffff;
+}
+
+.download-btn:hover {
+  background: #1565c0;
+}
+
+/* ================= UPLOAD FAB ================= */
+.upload-fab {
+  position: fixed;
+  top: 85px;
+  right: 40px;
+  z-index: 999;
+}
+
+.files-wrapper {
+  padding: 24px;
+}
+
+.files-header {
+  margin-bottom: 14px;
+}
+
+.files-search {
+  width: 320px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  outline: none;
+}
+
+.files-table-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+.files-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.files-table thead {
+  background: #04324d;
+  color: #fff;
+}
+
+.files-table th,
+.files-table td {
+  padding: 12px 14px;
+  font-size: 14px;
+}
+
+.files-table tbody tr:nth-child(even) {
+  background: #f5f7f9;
+}
+
+.files-table tbody tr:hover {
+  background: #eef3f7;
+}
+
+/* ================= HEADER ICONS ================= */
+.th-flex {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.th-flex i {
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ================= ACTION ICONS ================= */
+.actions i {
+  font-size: 18px;
+  margin: 0 6px;
+  cursor: pointer;
+  color: #1e88e5;
+}
+
+.actions i.bi-trash {
+  color: #e53935;
+}
+
+.actions i:hover {
+  transform: scale(1.15);
+}
+
+/* ================= RED + BUTTON ================= */
+/* .fab-btn {
+  position: fixed;
+  right: 36px;
+  bottom: 36px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #e53935;
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  z-index: 1000;
+}
+
+.fab-btn:hover {
+  background: #c62828;
+} */
+
+/* ================= UPLOAD MODAL ================= */
+.upload-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.upload-box {
+  width: 420px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  animation: scaleIn 0.25s ease;
+}
+
+.upload-box h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.upload-box h3 span {
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.upload-box label {
+  display: block;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.upload-box input,
+.upload-box textarea {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.upload-box textarea {
+  resize: none;
+  height: 80px;
+}
+
+.upload-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  background: #1e88e5;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.upload-btn:hover {
+  background: #1565c0;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* FLOATING + BUTTON (EXACT LIKE 1st SS) */
+.fab-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  background: #f44336; /* Material red */
+  color: #fff;
+
+  border: none;
+  outline: none;
+
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  z-index: 9999;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.fab-btn:hover {
+  background: #d32f2f;
+  transform: scale(1.08);
+}

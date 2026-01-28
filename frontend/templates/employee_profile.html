@@ -1,0 +1,141 @@
+{% extends "layouts/employee_base.html" %}
+
+{% block page_title %}Profile{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{{ url_for('static', filename='employee_profile.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="client-profile-page">
+
+    <div class="profile-header">
+      <div class="avatar-circle">
+        {{ employee.fullname[0]|upper if employee and employee.fullname else "E" }}
+      </div>
+      <div>
+        <h2 class="profile-name">{{ employee.fullname or "Employee" }}</h2>
+        <p class="profile-subtitle">Employee Profile</p>
+      </div>
+    </div>
+
+    <div class="profile-tabs">
+      <button class="tab active" data-tab="general">General</button>
+      <button class="tab" data-tab="appearance">Appearance</button>
+      <button class="tab" data-tab="password">Change Password</button>
+    </div>
+
+  <div class="profile-card">
+    
+
+<!--------------------------------- GENERAL TAB ---------------------------------->
+    <div class="tab-content active" id="general">
+      <form onsubmit="saveEmployeeProfile(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="fullname" value="{{ employee.fullname or '' }}" disabled>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" value="{{ employee.email or '' }}" disabled>
+        </div>
+
+        <div class="form-group">
+          <label>Employee Code</label>
+          <input type="text" id="emp_code" value="{{ employee.emp_code or '' }}" disabled>
+        </div>
+
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" id="address" value="{{ employee.address or '' }}">
+        </div>
+
+        <div class="form-group">
+          <label>Contact</label>
+          <input type="text" id="contact" value="{{ employee.contact or '' }}">
+        </div>
+        <button type="submit" class="btn-primary">Save Changes</button>
+
+        <!-- <button class="btn-primary">Save Changes</button> -->
+      </form>
+    </div>
+
+<!-------------------- APPEARANCE TAB ------------------------------------------------->
+
+  <div class="tab-content" id="appearance">
+    <div class="appearance-preview">
+      <h3 class="section-title">Theme</h3>
+      <div class="theme-options">
+        <div class="theme light" data-theme="light"></div>
+        <div class="theme dark" data-theme="dark"></div>
+        <div class="theme aqua" data-theme="aqua"></div>
+        <div class="theme green" data-theme="green"></div>
+      </div>
+
+      <h3 class="section-title mt-24">Font Style</h3>
+
+      <div class="form-group-inline">
+        <select id="fontFamily">
+          <option value="Poppins">Poppins</option>
+          <option value="Arial">Arial</option>
+          <option value="Inter">Inter</option>
+        </select>
+
+        <select id="fontSize">
+          <option value="14px">14px</option>
+          <option value="16px">16px</option>
+          <option value="18px">18px</option>
+        </select>
+
+        <div class="bold-toggle">
+          <label class="switch">
+            <input type="checkbox" id="boldToggle">
+            <span class="slider"></span>
+          </label>
+          <span class="bold-label">Bold</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- ----------------------------------------------- PASSWORD TAB ------------------------------- -->
+    <div class="tab-content" id="password">
+      <form onsubmit="changePassword(event)">
+        <div class="form-group">
+          <label>Current Password</label>
+          <div class="password-wrapper">
+          <input type="password" id="current_password">
+          <span class="toggle-password show-password-btn" onclick="togglePassword('current_password', 'this')">Show</span>
+        </div>
+        </div>
+
+        <div class="form-group">
+          <label>New Password</label>
+          <div class="password-wrapper">
+          <input type="password" id="new_password">
+          <span class="toggle-password show-password-btn" onclick="togglePassword('new_password', 'this')">Show</span>
+        </div>
+        </div>
+
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <div class="password-wrapper">
+          <input type="password" id="confirm_password">
+          <span class="toggle-password show-password-btn" onclick="togglePassword('confirm_password', 'this')">Show</span>
+        </div> 
+        </div>
+
+
+        <button type="submit" class="btn-primary">Update Password</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='script/employee_profile.js') }}"></script>
+
+{% endblock %}

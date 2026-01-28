@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Access Denied</title>
+    <style>
+        body { 
+            font-family: Poppins, sans-serif; 
+            background:#f5f5f5; 
+            text-align:center; 
+            padding-top:100px; 
+        }
+        .box {
+            display:inline-block;
+            padding:30px 40px;
+            background:white;
+            border-radius:10px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+        }
+        h2 { color:#d9534f; }
+        p { font-size:16px; }
+        .btn {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background: #233876;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>❌ Access Denied</h2>
+        <p>You do not have permission to access this page.</p>
+        <p>Please contact admin at:</p>
+        <h4>{{ admin_email }}</h4>
+
+        {% if session.get('role') == 'client' %}
+            <a class="btn" href="{{ url_for('client_dashboard', id=session['user_id']) }}">Back to Dashboard</a>
+
+        {% elif session.get('role') == 'employee' %}
+            <a class="btn" href="{{ url_for('employee_dashboard', id=session['user_id']) }}">Back to Dashboard</a>
+
+        {% else %}
+            <a class="btn" href="{{ url_for('login_page') }}">Login Again</a>
+        {% endif %}
+    </div>
+</body>
+</html>

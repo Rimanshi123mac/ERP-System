@@ -1,0 +1,147 @@
+
+{% extends "layouts/admin_base.html" %}
+
+{% block page_title %}Activity Logs{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='admin_logs.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-icons/bootstrap-icons.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="page-content-container">
+
+  <h1 class="page-title">Activity Logs</h1>
+
+  <div class="filter-box">
+    <input type="text" id="filter_username" placeholder="Search Username">
+
+    <select id="filter_role">
+      <option value="">Filter by Role</option>
+      <option value="admin">Admin</option>
+      <option value="client">Client</option>
+      <option value="employee">Employee</option>
+    </select>
+
+    <input type="text" id="filter_action" placeholder="Search Action">
+    <input type="date" id="start_date">
+    <input type="date" id="end_date">
+
+    <button class="filter-btn" onclick="loadLogs()">
+      <i class="fa fa-filter"></i> Apply Filter
+    </button>
+    <button class="clear-btn" onclick="clearFilter()">Reset</button>
+  </div>
+
+  <div class="table-wrapper">
+
+    <table class="theme-table">
+      <thead>
+        <tr>
+          <th><span class="th-flex"><strong>ID</strong><i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></span></th>
+          <th><span class="th-flex"><strong>User</strong><i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></span></th>
+          <th><span class="th-flex"><strong>Role</strong><i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></span></th>
+          <th><span class="th-flex"><strong>Action</strong><i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></span></th>
+          <th><span class="th-flex"><strong>Details</strong><i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></span></th>
+          <th><span class="th-flex"><strong>Timestamp</strong><i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></span></th>
+        </tr>
+      </thead>
+
+      <tbody id="logs_table_body">
+        <tr><td colspan="6" class="text-center">Loading...</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pagination-bar">
+      Rows per page:
+      <select id="per-page-select" onchange="loadLogs()">
+        <option value="25">25</option>
+        <option value="50" selected>50</option>
+        <option value="100">100</option>
+      </select>
+      <span id="logs-count">0-0 of 0</span>
+      <span class="pagination-arrows">
+        <button id="prev-page" onclick="changePage(-1)" disabled>◀</button>
+        <button id="next-page" onclick="changePage(1)">▶</button>
+      </span>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+let currentPage = 1;
+let totalPages = 1;
+
+function loadLogs(page = 1) {
+  currentPage = page;
+  let username = document.getElementById("filter_username").value;
+  let role = document.getElementById("filter_role").value;
+  let action = document.getElementById("filter_action").value;
+  let start_date = document.getElementById("start_date").value;
+  let end_date = document.getElementById("end_date").value;
+  let per_page = document.getElementById("per-page-select").value;
+
+  let url = `/api/logs?username=${username}&role=${role}&action=${action}&start_date=${start_date}&end_date=${end_date}&page=${page}&per_page=${per_page}`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      let rows = "";
+      if (!data.logs || data.logs.length === 0) {
+        rows = `<tr><td colspan="6" class="text-center">No logs found</td></tr>`;
+      } else {
+        data.logs.forEach(log => {
+          rows += `
+            <tr>
+              <td>${log.id}</td>
+              <td>${log.username}</td>
+              <td>${log.role}</td>
+              <td>${log.action}</td>
+              <td>${log.details}</td>
+              <td>${log.timestamp}</td>
+            </tr>
+          `;
+        });
+      }
+
+      document.getElementById("logs_table_body").innerHTML = rows;
+      
+      // Update pagination info
+      totalPages = data.total_pages || 1;
+      const start = data.logs.length > 0 ? ((currentPage - 1) * per_page) + 1 : 0;
+      const end = start + data.logs.length - 1;
+      document.getElementById("logs-count").textContent = `${start}-${end} of ${data.total}`;
+      
+      // Update pagination buttons
+      document.getElementById("prev-page").disabled = currentPage <= 1;
+      document.getElementById("next-page").disabled = currentPage >= totalPages;
+    })
+    .catch(err => {
+      console.error("Error loading logs:", err);
+      document.getElementById("logs_table_body").innerHTML = `<tr><td colspan="6" class="text-center">Error loading logs</td></tr>`;
+    });
+}
+
+function changePage(direction) {
+  const newPage = currentPage + direction;
+  if (newPage >= 1 && newPage <= totalPages) {
+    loadLogs(newPage);
+  }
+}
+
+function clearFilter() {
+  document.getElementById("filter_username").value = "";
+  document.getElementById("filter_role").value = "";
+  document.getElementById("filter_action").value = "";
+  document.getElementById("start_date").value = "";
+  document.getElementById("end_date").value = "";
+  currentPage = 1;
+  loadLogs(1);
+}
+
+loadLogs(1);
+</script>
+
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends "layouts/employee_base.html" %}
+
+{% block page_title %}CRM Meet{% endblock %}
+
+{% block head_extra %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='client_crm_meet.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="crm-page">
+
+  <div class="crm-topbar">
+
+    <div class="crm-row row-top">
+      <div class="crm-title">CRM Meet</div>
+  
+      <select id="customerSelect" class="crm-select">
+        <option value="">All Customers</option>
+        {% for c in customers %}
+          <option value="{{ c.name }}">{{ c.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  
+    <div class="crm-row row-bottom">
+      <div class="crm-search-wrapper">
+        <i class="bi bi-search"></i>
+        <input type="text" id="meetingSearch" placeholder="Search">
+      </div>
+  
+      <a href="{{ url_for('employee_add_meeting') }}" class="btn btn-primary btn-add">
+        <i class="bi bi-plus-lg"></i>
+      </a>
+    </div>
+  
+  </div>
+  
+
+  <div class="crm-card">
+  <div class="table-container">
+    <table class="crm-table">
+      <thead>
+        <tr>
+          <th>
+            <span class="th-flex">
+              <strong>#</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span>
+          </th>
+          <th>
+            <span class="th-flex">
+              <strong>Customer Name</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span>
+          </th>
+          <th>
+            <span class="th-flex">
+              <strong>Date</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span>
+          </th>
+          <th>
+            <span class="th-flex">
+              <strong>Time</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span>
+          </th>
+          <th>
+            <span class="th-flex">
+              <strong>Purpose</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span>
+          </th>
+          <th>
+            <span class="th-flex">
+              <strong>Status</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="meetingBody">
+        {% for m in meetings %}
+        <tr data-client="{{ m.client_name }}">
+          <td>{{ loop.index }}</td>
+          <td>{{ m.client_name }}</td>
+          <td>{{ m.meeting_date }}</td>
+          <td>{{ m.meeting_time }}</td>
+          <td>{{ m.purpose }}</td>
+          <td>{{ m.status }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="6" style="text-align:center;">No meetings found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="pagination-bar">
+      Rows per page:
+      <select disabled>
+        <option>50</option>
+      </select>
+      <span>1-{{ files|length }} of {{ files|length }}</span>
+      <span class="pagination-arrows">◀ ▶</span>
+    </div>
+
+  </div>
+  </div>
+
+</div>
+
+<script>
+
+document.getElementById("customerSelect").addEventListener("change", function () {
+  const value = this.value.toLowerCase();
+  document.querySelectorAll("#meetingBody tr").forEach(row => {
+    const client = (row.getAttribute("data-client") || "").toLowerCase();
+    row.style.display = (!value || client === value) ? "" : "none";
+  });
+});
+
+document.getElementById("meetingSearch").addEventListener("input", function () {
+  const term = this.value.toLowerCase();
+  document.querySelectorAll("#meetingBody tr").forEach(row => {
+    const text = row.innerText.toLowerCase();
+    row.style.display = text.includes(term) ? "" : "none";
+  });
+});
+
+</script>
+
+{% endblock %}

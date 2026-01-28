@@ -1,0 +1,29 @@
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h2 class="admin-title">Admin Panel</h2>
+  </div>
+
+  <ul class="menu">
+    <li><a href="{{ url_for('admin_dashboard') }}">Home</a></li>
+
+    <li><a href="{{ url_for('admin_file_upload_page') }}">File Upload</a></li>
+
+    <li><a href="{{ url_for('admin_client_apps') }}">Client App</a></li>  
+
+    <li><a href="{{ url_for('admin_core_data_page') }}">Core Data</a></li>  
+
+    <li><a href="{{ url_for('admin_employee_market') }}">Employee Market</a></li>
+
+    <li><a href="{{ url_for('admin_crm') }}">CRM</a></li>
+
+    <li><a href="{{ url_for('admin_add_user') }}">Users</a></li>
+
+    <li><a href="{{ url_for('admin_rights') }}">
+      Rights / Approvals
+    </a></li>
+
+    <li>
+      <a href="{{ url_for('admin_logs_page') }}">Logs</a>
+    </li>
+  </ul>
+</aside>

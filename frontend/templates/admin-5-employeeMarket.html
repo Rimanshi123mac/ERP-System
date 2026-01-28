@@ -1,0 +1,234 @@
+{% extends "layouts/admin_base.html" %}
+
+{% block page_title %}Employee Market{% endblock %}
+
+{% block content %}
+
+<meta name="csrf-token" content="{{ csrf_token }}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='admin-5-employeeMarket.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-primary">Employee Market – Meeting Details</h2>  
+  </div>
+
+<!-- ============================================== MEETINGS TABLE UPCOMING/PAST ======================================== -->
+<div class="employee-table-container">
+
+  <table class="employee-table">
+    <thead>
+      <tr>
+        <th>
+          <span class="th-flex">
+            <strong> # 
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i> 
+            </strong>
+          </span>
+        </th>
+        <th>
+          <span class="th-flex">
+            <strong> Employee 
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </strong>
+          </span>
+        </th>
+        <th>
+          <span class="th-flex">
+            <strong>Client
+            <i class="bi bi-arrow-up"></i>
+            <i class="bi bi-three-dots-vertical"></i>
+            </strong>
+          </span>
+        </th>
+        <th>
+          <span class="th-flex"><strong>Date
+            <i class="bi bi-arrow-up"></i>
+            <i class="bi bi-three-dots-vertical"></i>
+            </strong>
+          </span>
+        </th>
+        <th>
+          <span class="th-flex"><strong>Time
+            <i class="bi bi-arrow-up"></i>
+            <i class="bi bi-three-dots-vertical"></i>
+            </strong>
+          </span>
+        </th>
+        <th>
+          <span class="th-flex"><strong>Purpose
+            <i class="bi bi-arrow-up"></i>
+            <i class="bi bi-three-dots-vertical"></i>
+            </strong>
+          </span>
+        </th>
+        <th>
+          <span class="th-flex"><strong>Comments
+            <i class="bi bi-arrow-up"></i>
+            <i class="bi bi-three-dots-vertical"></i>
+            </strong>
+          </span>
+        </th>
+        <th>
+          <span class="th-flex"><strong>Status
+            <i class="bi bi-arrow-up"></i>
+            <i class="bi bi-three-dots-vertical"></i>
+            </strong>
+          </span>
+        </th>
+      </tr>
+    </thead>
+
+    <!-- <tbody>
+      {% if all_meetings|length == 0 %}
+      <tr>
+        <td colspan="9" class="text-center">No meetings found</td>
+      </tr>
+      {% else %}
+      {% set today = now().strftime('%Y-%m-%d') %}
+      {% set current_time = now().strftime('%H:%M:%S') %}
+
+      {% for m in all_meetings %}
+
+        {% set db_status = (m.status or '').lower() %}
+
+        {% if db_status == 'cancelled' %}
+          {% set final_status = 'Cancelled' %}
+        {% else %}
+          {% if m.meeting_date > today %}
+            {% set final_status = 'Upcoming' %}
+          {% elif m.meeting_date == today and m.meeting_time > current_time %}
+            {% set final_status = 'Upcoming' %}
+          {% else %}
+            {% set final_status = 'Completed' %}
+          {% endif %}
+        {% endif %}
+
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ m.employee_name }}</td>
+          <td>{{ m.client_name }}</td>
+          <td>{{ m.meeting_date }}</td>
+          <td>{{ m.meeting_time }}</td>
+          <td>{{ m.purpose }}</td>
+          <td>{{ m.comments }}</td>
+          <td>
+            <span class="status-badge
+              {% if final_status == 'Upcoming' %}status-upcoming
+              {% elif final_status == 'Completed' %}status-completed
+              {% elif final_status == 'Cancelled' %}status-cancelled
+              {% endif %}
+            ">
+              {{ final_status }}
+            </span>
+          </td>
+        </tr>
+{% endfor %}
+      {% endif %}
+        
+      
+    </tbody> -->
+
+   <tbody>
+{% if meetings and meetings|length > 0 %}
+    {% for m in meetings %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ m.employee }}</td>
+        <td>{{ m.client }}</td>
+        <td>{{ m.date }}</td>
+        <td>{{ m.time }}</td>
+        <td>{{ m.purpose }}</td>
+        <td>{{ m.comments or '-' }}</td>
+        <td>{{ m.status }}</td>
+    </tr>
+    {% endfor %}
+{% else %}
+    <tr>
+        <td colspan="8" class="text-center">No meetings available</td>
+    </tr>
+{% endif %}
+</tbody>
+
+
+
+  </table>
+
+   <div class="pagination-bar">
+  Rows per page:
+  <select disabled>
+    <option>50</option>
+  </select>
+  <span>1–{{ all_meetings|length }} of {{ all_meetings|length }}</span>
+  <span class="pagination-arrows">◀ ▶</span>
+</div>
+
+</div>
+
+<!-- ================================================== ADD MEETING ================================================== -->
+<button class="fab-btn-red" id="addMeetingBtn" onclick="openMeetingPopup()">
+  <i class="bi bi-plus-lg"></i>
+</button>
+
+<div id="meetingOverlay" class="overlay hidden"></div>
+
+<div id="meetingPopup" class="popup hidden">
+
+  <div class="popup-header">
+    <h3>Add Meeting</h3>
+    <span class="close-btn" onclick="closeMeetingPopup()">×</span>
+  </div>
+
+  <form method="POST" action="{{ url_for('add_meeting') }}">
+
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+    <label>Employee Name</label>
+    <input type="text" name="employee_name" required>
+
+    <label>Client Name</label>
+    <input type="text" name="client_name" required>
+
+    <label>Meeting Date</label>
+    <input type="date" name="meeting_date" required>
+
+    <label>Meeting Time</label>
+    <input type="time" name="meeting_time" required>
+
+    <label>Purpose</label>
+    <input type="text" name="purpose" required>
+
+    <label>Comments</label>
+    <textarea name="comments"></textarea>
+
+    <div class="btn-group">
+      <button type="button" class="cancel-btn" onclick="closeMeetingPopup()">Cancel</button>
+      <button type="submit" class="upload-btn">Add</button>
+    </div>
+
+  </form>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+function openMeetingPopup() {
+  document.getElementById("meetingPopup").classList.remove("hidden");
+  document.getElementById("meetingOverlay").classList.remove("hidden");
+}
+
+function closeMeetingPopup() {
+  document.getElementById("meetingPopup").classList.add("hidden");
+  document.getElementById("meetingOverlay").classList.add("hidden");
+}
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,302 @@
+.files-wrapper {
+  padding: 24px;
+  background: var(--page-bg);
+  color: var(--card-text);
+}
+
+.files-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.files-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  width: 320px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: border-color 0.2s;
+}
+
+.files-search:focus-within {
+  border-color: var(--table-head-bg);
+}
+
+.files-search input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  background: transparent;
+  color: var(--card-text);
+}
+
+.files-search input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.main-wrapper.theme-dark .files-search input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.files-table-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+}
+
+.files-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+/* TABLE HEADER */
+.files-table thead {
+  background: var(--table-head-bg);
+  color: var(--table-head-text);
+}
+
+.files-table th {
+  padding: 14px;
+  font-size: 14px;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+/* TABLE BODY */
+.files-table tbody tr {
+  transition: all 0.25s ease;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.files-table td {
+  padding: 14px;
+  font-size: 14px;
+  text-align: left;
+  color: var(--card-text);
+  vertical-align: middle;
+}
+
+.files-table tbody tr:hover {
+  background: var(--table-hover-bg);
+  color: var(--card-text);
+}
+
+/* ALTERNATE ROW COLORS (Optional - can be removed) */
+.files-table tbody tr:nth-child(even) {
+  background: transparent;
+}
+
+/* ACTIONS & ICONS */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.actions i {
+  color: var(--table-head-bg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+}
+
+.actions i:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+}
+
+/* DOWNLOAD BUTTON / LINK */
+.download-btn {
+  background: transparent;
+  color: #10b981;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.download-btn:hover {
+  color: #059669;
+  transform: scale(1.08);
+}
+
+.download-btn i {
+  font-size: 16px;
+}
+
+/* DOWNLOAD ICON */
+.download-icon i {
+  color: #10b981;
+  font-size: 18px;
+  transition: transform 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+.download-icon i:hover {
+  color: #059669;
+  transform: scale(1.1);
+}
+
+/* FILES FOOTER / PAGINATION */
+.files-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  font-size: 13px;
+  background: var(--card-bg);
+  border-top: 1px solid var(--card-border);
+  color: var(--card-text);
+}
+
+.files-footer select {
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--card-text);
+  outline: none;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--card-text);
+}
+
+.pagination i {
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.pagination i:hover {
+  opacity: 1;
+}
+
+/* SORT ICONS */
+.sort {
+  font-size: 12px;
+  margin-left: 6px;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.sort:hover {
+  opacity: 1;
+}
+
+/* CHECKBOX STYLE */
+.files-table input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--table-head-bg);
+  cursor: pointer;
+}
+
+/* TABLE HEADER ICONS & FLEX */
+.th-flex {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.th-flex i {
+  color: var(--table-head-text);
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.9;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.th-flex i:hover {
+  opacity: 1;
+}
+
+.th-flex .bi-arrow-up {
+  font-size: 14px;
+}
+
+.th-flex .bi-three-dots-vertical {
+  font-size: 16px;
+  margin-left: 2px;
+}
+
+/* FILE NAME TEXT */
+.file-name-text {
+  color: var(--card-text);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.file-name-text:hover {
+  color: var(--table-head-bg);
+  text-decoration: underline;
+}
+
+/* ===================== THEME VARIABLE SETS ===================== */
+
+/* LIGHT */
+.theme-light {
+  --page-bg: #f5f7fa;
+  --card-bg: #ffffff;
+  --card-border: #d1d9e0;
+  --card-text: #1e3a5f;
+  --table-head-bg: #0b3a53;
+  --table-head-text: #ffffff;
+  --table-hover-bg: #eef4fa;
+}
+
+/* GREEN */
+.theme-green {
+  --page-bg: #f0f9f5;
+  --card-bg: #ffffff;
+  --card-border: #c4e7d4;
+  --card-text: #0a5f2f;
+  --table-head-bg: #0d8a50;
+  --table-head-text: #ffffff;
+  --table-hover-bg: #e8f5ed;
+}
+
+/* AQUA */
+.theme-aqua {
+  --page-bg: #f0fdff;
+  --card-bg: #ffffff;
+  --card-border: #c8eef8;
+  --card-text: #005a8a;
+  --table-head-bg: #0088cc;
+  --table-head-text: #ffffff;
+  --table-hover-bg: #e8faf5;
+}
+
+/* DARK */
+.theme-dark {
+  --page-bg: #121212;
+  --card-bg: #1e1e1e;
+  --card-border: #333;
+  --card-text: #e0e0e0;
+  --table-head-bg: #0a2e47;
+  --table-head-text: #e0e0e0;
+  --table-hover-bg: #232323;
+}

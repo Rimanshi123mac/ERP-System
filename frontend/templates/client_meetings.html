@@ -1,0 +1,44 @@
+
+{% extends "layouts/client_base.html" %}
+
+<!-- {% block title %}Client Meetings{% endblock %} -->
+{% block page_title %}Meetings{% endblock %}
+{% block content %}
+
+<div class="container py-4">
+
+  <h2 class="text-primary mb-4">Your Meetings</h2>
+
+  {% if meetings %}
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Employee</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Purpose</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for meeting in meetings %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ meeting.employee_name }}</td>
+        <td>{{ meeting.meeting_date }}</td>
+        <td>{{ meeting.meeting_time }}</td>
+        <td>{{ meeting.purpose }}</td>
+        <td>{{ meeting.status }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-muted">No meetings scheduled.</p>
+  {% endif %}
+
+</div>
+
+{% endblock %}
+

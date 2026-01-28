@@ -1,0 +1,484 @@
+/* body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9fafc;
+    padding: 30px;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.approve-btn {
+    background-color: #28a745;
+}
+
+.approve-btn:hover {
+    background-color: #218838;
+}
+
+.reject-btn { 
+    background-color: #dc3545;
+}
+
+.reject-btn:hover {
+    background-color: #c82333;
+}
+
+.profile-btn {
+    background-color: #007bff;
+}
+
+.profile-btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-activate {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-deactivate {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-activate:hover, .btn-deactivate:hover {
+  opacity: 0.85;
+} */
+
+
+
+
+/* ===== PAGE LAYOUT ===== */
+body {
+    background: #f8f9fa !important;
+    font-family: "Poppins", sans-serif;
+}
+
+h1, h2 {
+    font-weight: 600;
+}
+
+/* ===== CARD / SECTION BLOCKS ===== */
+section {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    border: 1px solid #e3e7ed;
+}
+
+/* ===== HEADERS ===== */
+header h1 {
+    font-size: 26px;
+    color: #04324d;
+}
+
+header p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* ===== TABLE WRAPPER ===== */
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* ===== TABLE STYLE ===== */
+table.table {
+    margin: 0;
+    font-size: 14px;
+}
+
+table.table thead {
+    background: #04324d !important;
+    color: white !important;
+}
+
+table.table thead th {
+    white-space: nowrap;
+    padding: 10px 12px;
+    font-weight: 600;
+}
+
+table.table tbody td {
+    padding: 9px 12px;
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background: rgba(0,0,0,0.04);
+}
+
+/* ===== NO DATA TEXT ===== */
+td[colspan] {
+    padding: 12px;
+    font-style: italic;
+    color: #6c757d;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+}
+
+.btn-info {
+    background: #0dcaf0;
+    border: none;
+}
+
+.btn-info:hover {
+    background: #0bb5d6;
+}
+
+.btn-sm {
+    padding: 4px 10px;
+    font-size: 13px;
+}
+
+.all-users .d-flex {
+    margin-bottom: 12px;
+}
+
+.status-active {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.status-inactive {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+    section {
+        padding: 15px;
+    }
+
+    table.table thead {
+        font-size: 13px;
+    }
+
+    table.table tbody td {
+        font-size: 13px;
+    }
+}
+
+.d-none { 
+    display: none !important; 
+}
+
+/* ========= TABLE WRAPPER ========= */
+.table-responsive {
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  margin-bottom: 18px;
+}
+
+.table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse !important;
+  font-size: 14px;
+  background: rgba(255,255,255,0.95);
+}
+
+.table-dark {
+  background: linear-gradient(135deg, #04324d 0%, #0a5a7d 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+}
+
+.table thead th {
+  padding: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  border-bottom: none !important;
+}
+
+.th-flex {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.th-flex strong {
+  font-size: 13px;
+}
+
+.th-flex i {
+  font-size: 14px;
+  opacity: 0.9;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.table tbody tr {
+  transition: background 0.22s ease, transform 0.12s ease;
+}
+
+.table tbody tr:hover {
+  background: rgba(0,0,0,0.05);
+  transform: translateY(-1px);
+}
+
+.table tbody td[colspan] {
+  font-style: italic;
+  color: #6b7280;
+  font-size: 14px;
+  background: #f9fafb;
+}
+
+.table .btn-sm {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.pagination-bar {
+  background: white;
+  padding: 10px 16px;
+  border-top: 1px solid #d1d5db;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+}
+
+.pagination-bar select {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 13px;
+  background: #fff;
+}
+
+.pagination-arrows {
+  opacity: 0.6;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#loadAllUsersBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  padding: 8px 14px;
+}
+
+/* ======================================================
+   DARK THEME FIXES — ONLY APPLY IN .theme-dark MODE
+   ====================================================== */
+.theme-dark body,
+.theme-dark .container-fluid {
+  background: #111 !important;
+  color: #e5e5e5 !important;
+}
+
+.theme-dark header h1 {
+  color: #ffffff !important;
+}
+
+.theme-dark header p {
+  color: #bbbbbb !important;
+}
+
+.theme-dark section {
+  background: #1a1a1a !important;
+  color: #e5e5e5 !important;
+  border: 1px solid #2c2c2c !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.6) !important;
+}
+
+.theme-dark section h2 {
+  color: #ffffff !important;
+}
+
+/* Table pagination bar */
+.theme-dark .pagination-bar {
+  background: #1a1a1a !important;
+  border-top: 1px solid #333 !important;
+  color: #cccccc !important;
+}
+
+.theme-dark .pagination-bar select {
+  background: #121212 !important;
+  color: #ffffff !important;
+  border: 1px solid #444 !important;
+}
+
+/* ============================================= */
+/* MATCH FILEUPLOAD TABLE STYLE FOR RIGHTS TABLE */
+/* ============================================= */
+
+.rights-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.rights-table thead {
+  background: #04324d !important;
+  color: #ffffff !important;
+}
+
+.rights-table th, 
+.rights-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #2c2c2c;
+  text-align: left;
+}
+
+.rights-table tbody tr {
+  background: #1a1a1a;
+  transition: background .2s ease;
+}
+
+.rights-table tbody tr:hover {
+  background: #242424;
+}
+
+.rights-table .th-flex strong,
+.rights-table .th-flex i {
+  color: #ffffff !important;
+}
+
+.rights-pagination {
+  background: #1a1a1a;
+  color: #e0e0e0;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid #2c2c2c;
+}
+
+.rights-pagination select {
+  background: #121212;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+.pending-users {
+  margin-bottom: 32px; 
+}
+
+table.table tbody td {
+  background: inherit !important;
+}
+
+#allUsersTable td:last-child,
+#pendingUsersTable td:last-child {
+  background: inherit !important;
+}
+
+/* Table Wrapper */
+.rights-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: var(--table-row-bg);
+  color: var(--table-text);
+}
+
+/* Header */
+.rights-table thead {
+  background: var(--table-header-bg);
+  color: white;
+}
+
+.rights-table th {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Rows */
+.rights-table td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.rights-table tbody tr {
+  background: var(--table-row-bg);
+  color: var(--table-text);
+}
+
+.rights-table tbody tr:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+.card, .crm-card, .feature-section, .table-wrapper, section {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+  color: var(--text) !important;
+}

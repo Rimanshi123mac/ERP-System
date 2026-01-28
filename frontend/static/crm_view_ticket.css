@@ -1,0 +1,749 @@
+/* ================================================================
+   RAISED TICKETS PAGE - THEME-AWARE CSS
+   File Name: crm_view_ticket.css
+   FIXES: Proper theme selectors, better specificity, CSS variables
+================================================================ */
+
+/* PAGE WRAPPER - Uses CSS variables for theme support */
+.crm-detail-card {
+  background: var(--card-bg, #ffffff) !important;
+  border: 1px solid var(--card-border, #e3e7ee) !important;
+  border-radius: 16px !important;
+  padding: 40px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+  color: var(--card-text, #111) !important;
+  margin: 0 auto !important;
+  max-width: 100% !important;
+}
+
+/* PAGE TITLE */
+.page-title {
+  font-size: 32px !important;
+  font-weight: 900 !important;
+  color: var(--card-text, #111) !important;
+  margin: 0 0 32px 0 !important;
+  display: block !important;
+  padding-bottom: 20px !important;
+  border-bottom: 3px solid var(--card-border, #ddd) !important;
+}
+
+/* FILTER BOX */
+.filter-box {
+  background: var(--card-bg, #ffffff) !important;
+  border: 2px solid var(--card-border, #ddd) !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  margin-bottom: 32px !important;
+  display: flex !important;
+  gap: 14px !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.3s ease !important;
+}
+
+.filter-box:hover {
+  border-color: #007bff !important;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.12) !important;
+}
+
+/* FILTER INPUTS */
+.filter-box input,
+.filter-box select {
+  padding: 11px 14px !important;
+  border: 2px solid var(--card-border, #ddd) !important;
+  border-radius: 10px !important;
+  background: var(--input-bg, #f8f9fa) !important;
+  color: var(--card-text, #111) !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  width: auto !important;
+  min-width: 150px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.filter-box input:hover,
+.filter-box select:hover {
+  border-color: #007bff !important;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15) !important;
+}
+
+.filter-box input:focus,
+.filter-box select:focus {
+  outline: none !important;
+  border-color: #007bff !important;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15) !important;
+  background: var(--input-bg, #fff) !important;
+}
+
+.filter-box input[type="date"] {
+  width: auto !important;
+  min-width: 140px !important;
+}
+
+.filter-box select {
+  appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23333' d='M1 1l5 5 5-5'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  padding-right: 36px !important;
+}
+
+/* ================================================================
+   FILTER BUTTONS - EXPLICIT THEME COLORS
+   Each theme gets its own specific colors
+================================================================ */
+
+/* Light Theme - Blue */
+.crm-detail-card.theme-light .filter-btn,
+.filter-btn {
+  padding: 11px 28px !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: 'Poppins', sans-serif !important;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3) !important;
+}
+
+.crm-detail-card.theme-light .filter-btn:hover,
+.filter-btn:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #003d82 100%) !important;
+  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Dark Theme - Light Blue */
+.crm-detail-card.theme-dark .filter-btn {
+  background: linear-gradient(135deg, #005eff 0%, #0042a3 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(77, 138, 255, 0.3) !important;
+}
+
+.crm-detail-card.theme-dark .filter-btn:hover {
+  background: linear-gradient(135deg, #0042a3 0%, #002958 100%) !important;
+  box-shadow: 0 10px 30px rgba(77, 138, 255, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Aqua Theme - Aqua Blue */
+.crm-detail-card.theme-aqua .filter-btn {
+  background: linear-gradient(135deg, #0097e6 0%, #006ba3 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(0, 151, 230, 0.3) !important;
+}
+
+.crm-detail-card.theme-aqua .filter-btn:hover {
+  background: linear-gradient(135deg, #006ba3 0%, #004d75 100%) !important;
+  box-shadow: 0 10px 30px rgba(0, 151, 230, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Green Theme - Green */
+.crm-detail-card.theme-green .filter-btn {
+  background: linear-gradient(135deg, #18b761 0%, #0e8a47 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(24, 183, 97, 0.3) !important;
+}
+
+.crm-detail-card.theme-green .filter-btn:hover {
+  background: linear-gradient(135deg, #0e8a47 0%, #066533 100%) !important;
+  box-shadow: 0 10px 30px rgba(24, 183, 97, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* RESET BUTTON */
+.clear-btn {
+  padding: 11px 28px !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: 'Poppins', sans-serif !important;
+  background: linear-gradient(135deg, #dc3545 0%, #a71d2a 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3) !important;
+}
+
+.clear-btn:hover {
+  background: linear-gradient(135deg, #a71d2a 0%, #7d1520 100%) !important;
+  box-shadow: 0 10px 30px rgba(220, 53, 69, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* TABLE CONTAINER */
+.table-container {
+  background: var(--card-bg, #ffffff) !important;
+  border: 1px solid var(--card-border, #ddd) !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+  margin-bottom: 24px !important;
+}
+
+/* TABLE */
+.modern-table,
+.crm-table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-size: 14px !important;
+  background: var(--card-bg, #ffffff) !important;
+}
+
+/* TABLE HEADER - THEME SPECIFIC COLORS */
+.modern-table thead,
+.crm-table thead {
+  background: linear-gradient(135deg, #003c60 0%, #004477 100%) !important;
+  color: #ffffff !important;
+}
+
+.crm-detail-card.theme-dark .modern-table thead,
+.crm-detail-card.theme-dark .crm-table thead {
+  background: linear-gradient(135deg, #062a3b 0%, #0d1117 100%) !important;
+}
+
+.crm-detail-card.theme-aqua .modern-table thead,
+.crm-detail-card.theme-aqua .crm-table thead {
+  background: linear-gradient(135deg, #0078b5 0%, #005f73 100%) !important;
+}
+
+.crm-detail-card.theme-green .modern-table thead,
+.crm-detail-card.theme-green .crm-table thead {
+  background: linear-gradient(135deg, #14532d 0%, #0d7b43 100%) !important;
+}
+
+.modern-table th,
+.crm-table th {
+  padding: 16px 14px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-align: left !important;
+  border: none !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* TABLE ROWS */
+.modern-table tbody tr,
+.crm-table tbody tr {
+  border-bottom: 1px solid var(--card-border, #e3e7ee) !important;
+  background: var(--card-bg, #ffffff) !important;
+  transition: all 0.2s ease !important;
+}
+
+.modern-table tbody tr:nth-child(even),
+.crm-table tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.02) !important;
+}
+
+.modern-table tbody tr:hover,
+.crm-table tbody tr:hover {
+  background: rgba(0, 123, 255, 0.08) !important;
+  box-shadow: inset 0 0 8px rgba(0, 123, 255, 0.1) !important;
+}
+
+.crm-detail-card.theme-dark .modern-table tbody tr:hover,
+.crm-detail-card.theme-dark .crm-table tbody tr:hover {
+  background: rgba(77, 138, 255, 0.12) !important;
+}
+
+.crm-detail-card.theme-aqua .modern-table tbody tr:hover,
+.crm-detail-card.theme-aqua .crm-table tbody tr:hover {
+  background: rgba(0, 151, 230, 0.1) !important;
+}
+
+.crm-detail-card.theme-green .modern-table tbody tr:hover,
+.crm-detail-card.theme-green .crm-table tbody tr:hover {
+  background: rgba(24, 183, 97, 0.1) !important;
+}
+
+/* TABLE CELLS */
+.modern-table td,
+.crm-table td {
+  padding: 14px !important;
+  font-size: 14px !important;
+  border: none !important;
+  color: var(--card-text, #111) !important;
+  vertical-align: middle !important;
+}
+
+/* HEADER ICONS */
+.th-flex {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.th-flex i {
+  opacity: 0.6 !important;
+  font-size: 12px !important;
+  transition: opacity 0.2s !important;
+}
+
+.modern-table th:hover .th-flex i,
+.crm-table th:hover .th-flex i {
+  opacity: 1 !important;
+}
+
+/* ================================================================
+   VIEW BUTTON - THEME SPECIFIC COLORS
+================================================================ */
+
+/* Light Theme - Blue */
+.crm-detail-card.theme-light .btn-view,
+.crm-detail-card.theme-light .crm-btn-view,
+.btn-view,
+.crm-btn-view {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+  color: #ffffff !important;
+  padding: 8px 20px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: inline-block !important;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.25) !important;
+}
+
+.crm-detail-card.theme-light .btn-view:hover,
+.crm-detail-card.theme-light .crm-btn-view:hover,
+.btn-view:hover,
+.crm-btn-view:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #003d82 100%) !important;
+  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.35) !important;
+  transform: translateY(-2px) !important;
+  text-decoration: none !important;
+  color: #ffffff !important;
+}
+
+/* Dark Theme - Light Blue */
+.crm-detail-card.theme-dark .btn-view,
+.crm-detail-card.theme-dark .crm-btn-view {
+  background: linear-gradient(135deg, #005eff 0%, #0042a3 100%) !important;
+  box-shadow: 0 4px 12px rgba(77, 138, 255, 0.25) !important;
+}
+
+.crm-detail-card.theme-dark .btn-view:hover,
+.crm-detail-card.theme-dark .crm-btn-view:hover {
+  background: linear-gradient(135deg, #0042a3 0%, #002958 100%) !important;
+  box-shadow: 0 6px 18px rgba(77, 138, 255, 0.35) !important;
+}
+
+/* Aqua Theme - Aqua Blue */
+.crm-detail-card.theme-aqua .btn-view,
+.crm-detail-card.theme-aqua .crm-btn-view {
+  background: linear-gradient(135deg, #0097e6 0%, #006ba3 100%) !important;
+  box-shadow: 0 4px 12px rgba(0, 151, 230, 0.25) !important;
+}
+
+.crm-detail-card.theme-aqua .btn-view:hover,
+.crm-detail-card.theme-aqua .crm-btn-view:hover {
+  background: linear-gradient(135deg, #006ba3 0%, #004d75 100%) !important;
+  box-shadow: 0 6px 18px rgba(0, 151, 230, 0.35) !important;
+}
+
+/* Green Theme - Green */
+.crm-detail-card.theme-green .btn-view,
+.crm-detail-card.theme-green .crm-btn-view {
+  background: linear-gradient(135deg, #18b761 0%, #0e8a47 100%) !important;
+  box-shadow: 0 4px 12px rgba(24, 183, 97, 0.25) !important;
+}
+
+.crm-detail-card.theme-green .btn-view:hover,
+.crm-detail-card.theme-green .crm-btn-view:hover {
+  background: linear-gradient(135deg, #0e8a47 0%, #066533 100%) !important;
+  box-shadow: 0 6px 18px rgba(24, 183, 97, 0.35) !important;
+}
+
+/* PAGINATION */
+.pagination-bar,
+.crm-pagination {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  padding: 18px 14px !important;
+  background: rgba(0, 0, 0, 0.02) !important;
+  font-size: 13px !important;
+  color: var(--card-text, #111) !important;
+  border-top: 1px solid var(--card-border, #ddd) !important;
+}
+
+.pagination-bar select {
+  padding: 6px 10px !important;
+  border: 1px solid var(--card-border, #ddd) !important;
+  border-radius: 6px !important;
+  background: var(--input-bg, #f8f9fa) !important;
+  color: var(--card-text, #111) !important;
+  cursor: not-allowed !important;
+  font-size: 12px !important;
+}
+
+.pagination-bar span {
+  font-weight: 600 !important;
+  color: var(--card-text, #111) !important;
+}
+
+/* ================================================================
+   BACK LINK - THEME SPECIFIC COLORS
+================================================================ */
+
+/* Light Theme - Blue */
+.crm-detail-card.theme-light .back-list,
+.back-list {
+  color: #007bff !important;
+  text-decoration: none !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  display: inline-block !important;
+  transition: all 0.3s ease !important;
+  padding: 8px 0 !important;
+  margin-top: 24px !important;
+}
+
+.crm-detail-card.theme-light .back-list:hover,
+.back-list:hover {
+  color: #0056b3 !important;
+  text-decoration: underline !important;
+  transform: translateX(-4px) !important;
+}
+
+/* Dark Theme - Light Blue */
+.crm-detail-card.theme-dark .back-list {
+  color: #4d8aff !important;
+}
+
+.crm-detail-card.theme-dark .back-list:hover {
+  color: #7fa8ff !important;
+}
+
+/* Aqua Theme - Aqua Blue */
+.crm-detail-card.theme-aqua .back-list {
+  color: #0097e6 !important;
+}
+
+.crm-detail-card.theme-aqua .back-list:hover {
+  color: #00b8ff !important;
+}
+
+/* Green Theme - Green */
+.crm-detail-card.theme-green .back-list {
+  color: #18b761 !important;
+}
+
+.crm-detail-card.theme-green .back-list:hover {
+  color: #2ed573 !important;
+}
+
+/* ================================================================
+   DARK THEME WRAPPER - Additional overrides
+================================================================ */
+.crm-detail-card.theme-dark {
+  background: #1e1e1e !important;
+  border-color: #2a2a2a !important;
+}
+
+.crm-detail-card.theme-dark .page-title {
+  color: #e5e5e5 !important;
+  border-bottom-color: #3a3a3a !important;
+}
+
+.crm-detail-card.theme-dark .filter-box {
+  background: #1e1e1e !important;
+  border-color: #2a2a2a !important;
+}
+
+.crm-detail-card.theme-dark .filter-box input,
+.crm-detail-card.theme-dark .filter-box select {
+  background: #2a2a2a !important;
+  border-color: #3a3a3a !important;
+  color: #e5e5e5 !important;
+}
+
+.crm-detail-card.theme-dark .table-container {
+  border-color: #2a2a2a !important;
+  background: #1e1e1e !important;
+}
+
+.crm-detail-card.theme-dark .modern-table tbody tr:nth-child(even),
+.crm-detail-card.theme-dark .crm-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.crm-detail-card.theme-dark .modern-table td,
+.crm-detail-card.theme-dark .crm-table td {
+  color: #e5e5e5 !important;
+}
+
+/* ================================================================
+   AQUA THEME WRAPPER - Additional overrides
+================================================================ */
+.crm-detail-card.theme-aqua {
+  background: #e8fcff !important;
+  border-color: #98e5ff !important;
+}
+
+.crm-detail-card.theme-aqua .page-title {
+  color: #03485a !important;
+  border-bottom-color: #98e5ff !important;
+}
+
+.crm-detail-card.theme-aqua .filter-box {
+  background: #e8fcff !important;
+  border-color: #98e5ff !important;
+}
+
+.crm-detail-card.theme-aqua .filter-box input,
+.crm-detail-card.theme-aqua .filter-box select {
+  background: #f0fdff !important;
+  border-color: #98e5ff !important;
+  color: #03485a !important;
+}
+
+.crm-detail-card.theme-aqua .table-container {
+  border-color: #98e5ff !important;
+  background: #e8fcff !important;
+}
+
+.crm-detail-card.theme-aqua .modern-table tbody tr:nth-child(even),
+.crm-detail-card.theme-aqua .crm-table tbody tr:nth-child(even) {
+  background: rgba(0, 151, 230, 0.04) !important;
+}
+
+.crm-detail-card.theme-aqua .modern-table td,
+.crm-detail-card.theme-aqua .crm-table td {
+  color: #03485a !important;
+}
+
+/* ================================================================
+   GREEN THEME WRAPPER - Additional overrides
+================================================================ */
+.crm-detail-card.theme-green {
+  background: #eafff4 !important;
+  border-color: #7ed9a3 !important;
+}
+
+.crm-detail-card.theme-green .page-title {
+  color: #064d26 !important;
+  border-bottom-color: #7ed9a3 !important;
+}
+
+.crm-detail-card.theme-green .filter-box {
+  background: #eafff4 !important;
+  border-color: #7ed9a3 !important;
+}
+
+.crm-detail-card.theme-green .filter-box input,
+.crm-detail-card.theme-green .filter-box select {
+  background: #f0fff5 !important;
+  border-color: #7ed9a3 !important;
+  color: #064d26 !important;
+}
+
+.crm-detail-card.theme-green .table-container {
+  border-color: #7ed9a3 !important;
+  background: #eafff4 !important;
+}
+
+.crm-detail-card.theme-green .modern-table tbody tr:nth-child(even),
+.crm-detail-card.theme-green .crm-table tbody tr:nth-child(even) {
+  background: rgba(24, 183, 97, 0.04) !important;
+}
+
+.crm-detail-card.theme-green .modern-table td,
+.crm-detail-card.theme-green .crm-table td {
+  color: #064d26 !important;
+}
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+@media (max-width: 1024px) {
+  .crm-detail-card {
+    padding: 30px !important;
+  }
+
+  .page-title {
+    font-size: 28px !important;
+    margin-bottom: 28px !important;
+  }
+
+  .filter-box {
+    padding: 20px !important;
+    gap: 12px !important;
+  }
+
+  .filter-box input,
+  .filter-box select {
+    min-width: 130px !important;
+    padding: 10px 12px !important;
+    font-size: 13px !important;
+  }
+
+  .filter-btn,
+  .clear-btn {
+    padding: 10px 24px !important;
+    font-size: 13px !important;
+  }
+
+  .modern-table th,
+  .crm-table th {
+    padding: 14px 12px !important;
+    font-size: 13px !important;
+  }
+
+  .modern-table td,
+  .crm-table td {
+    padding: 12px !important;
+    font-size: 13px !important;
+  }
+
+  .btn-view,
+  .crm-btn-view {
+    padding: 7px 16px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .crm-detail-card {
+    padding: 20px !important;
+    border-radius: 12px !important;
+    margin: 0 !important;
+  }
+
+  .page-title {
+    font-size: 24px !important;
+    margin-bottom: 24px !important;
+    padding-bottom: 16px !important;
+  }
+
+  .filter-box {
+    padding: 16px !important;
+    gap: 10px !important;
+    flex-direction: column !important;
+  }
+
+  .filter-box input,
+  .filter-box select,
+  .filter-btn,
+  .clear-btn {
+    width: 100% !important;
+    padding: 11px 12px !important;
+  }
+
+  .table-container {
+    border-radius: 10px !important;
+    overflow-x: auto !important;
+  }
+
+  .modern-table,
+  .crm-table {
+    min-width: 600px !important;
+    font-size: 13px !important;
+  }
+
+  .modern-table th,
+  .crm-table th {
+    padding: 12px 10px !important;
+    font-size: 12px !important;
+  }
+
+  .modern-table td,
+  .crm-table td {
+    padding: 10px !important;
+    font-size: 12px !important;
+  }
+
+  .th-flex {
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+
+  .th-flex i {
+    font-size: 11px !important;
+  }
+
+  .btn-view,
+  .crm-btn-view {
+    padding: 7px 14px !important;
+    font-size: 11px !important;
+    display: block !important;
+    text-align: center !important;
+  }
+
+  .back-list {
+    font-size: 13px !important;
+    margin-top: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .crm-detail-card {
+    padding: 16px !important;
+  }
+
+  .page-title {
+    font-size: 20px !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 12px !important;
+    border-bottom: 2px solid var(--card-border, #ddd) !important;
+  }
+
+  .filter-box {
+    padding: 12px !important;
+    gap: 8px !important;
+  }
+
+  .filter-box input,
+  .filter-box select {
+    font-size: 12px !important;
+    padding: 10px 10px !important;
+    min-width: 100% !important;
+  }
+
+  .filter-btn,
+  .clear-btn {
+    padding: 10px 16px !important;
+    font-size: 12px !important;
+    width: 100% !important;
+  }
+
+  .btn-view,
+  .crm-btn-view {
+    padding: 6px 12px !important;
+    font-size: 10px !important;
+  }
+
+  .back-list {
+    font-size: 12px !important;
+    display: block !important;
+    margin-top: 16px !important;
+  }
+}
+
+/* Utility Classes */
+.mb-4 {
+  margin-bottom: 32px !important;
+}
+
+.mt-3 {
+  margin-top: 24px !important;
+}
+
+.fw-bold {
+  font-weight: 700 !important;
+}
+
+.text-primary {
+  color: #007bff !important;
+}

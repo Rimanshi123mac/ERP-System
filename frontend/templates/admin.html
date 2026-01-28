@@ -1,0 +1,77 @@
+{% extends "layouts/admin_base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<section class="welcome-section">
+  <div class="welcome-logo">
+    <img src="{{ url_for('static', filename='images/N_logo.png') }}" alt="Logo">
+  </div>
+  <h1 class="welcome-title">
+    Welcome, {{ session.admin_name or 'Admin' }}!
+  </h1>
+  <p class="welcome-subtitle">
+    Here’s a quick overview of your system
+  </p>
+</section>
+
+<div class="crop-stats">
+
+  <div class="crop-card blue">
+    <div class="crop-icon">
+      <i class="bi bi-people"></i>
+    </div>
+    <div class="crop-content">
+      <h3>Total Users</h3>
+      <p class="crop-number">{{ total_users }}</p>
+      <p class="crop-desc">Active accounts</p>
+    </div>
+  </div>
+
+  <div class="crop-card yellow">
+    <div class="crop-icon">
+      <i class="bi bi-clock-history"></i>
+    </div>
+    <div class="crop-content">
+      <h3>Pending Approvals</h3>
+      <p class="crop-number">{{ pending_approvals }}</p>
+      <p class="crop-desc">Awaiting review</p>
+    </div>
+  </div>
+
+  <div class="crop-card green">
+    <div class="crop-icon">
+      <i class="bi bi-file-earmark-arrow-up"></i>
+    </div>
+    <div class="crop-content">
+      <h3>Total Files</h3>
+      <p class="crop-number">{{ total_files }}</p>
+      <p class="crop-desc">Uploaded documents</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- <div class="quick-actions">
+  <h3>Quick Actions</h3>
+
+  <div class="action-grid">
+    <a href="{{ url_for('admin_upload') }}" class="action-card">
+      <i class="bi bi-cloud-upload"></i>
+      <span>File Upload</span>
+    </a>
+
+    <a href="{{ url_for('admin_rights') }}" class="action-card">
+      <i class="bi bi-shield-check"></i>
+      <span>Approvals</span>
+    </a>
+
+    <a href="{{ url_for('admin_profile') }}" class="action-card">
+      <i class="bi bi-person-circle"></i>
+      <span>My Profile</span>
+    </a>
+  </div>
+</div> -->
+
+{% endblock %}

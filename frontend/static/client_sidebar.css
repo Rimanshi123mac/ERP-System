@@ -1,0 +1,140 @@
+.client-layout{
+  margin: 0;
+  font-family: inherit;
+}
+
+.client-container{
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.sidebar{
+  width: 240px;
+  background: #1e293b;
+  color: #fff;
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.sidebar .sidebar-logo {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.sidebar-logo-img {
+  width: 120px;
+  display: block;
+  margin-bottom: 24px;
+}
+
+.sidebar nav a {
+  display: block;
+  color: #cbd5e1;
+  padding: 10px 0;
+  text-decoration: none;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  color: #fff;
+}
+
+.client-main{
+  margin-left: 240px;
+  padding: 30px;
+  width: calc(100% - 240px);
+}
+
+.sidebar-dropdown > .sidebar-submenu {
+    display: none;
+    padding-left: 25px;
+}
+
+.sidebar-dropdown:hover > .sidebar-submenu {
+    display: block;
+}
+
+/* ================================
+   CLIENT SIDEBAR → MATCH EMPLOYEE
+================================ */
+
+/* 1. Sidebar base */
+.sidebar {
+  background: #ffffff !important;
+  width: 260px;
+  border-right: 1px solid #e5e7eb;
+  box-shadow: 4px 0 15px rgba(0,0,0,0.04);
+  padding: 22px 14px;
+}
+
+/* 2. Sidebar links (visual only) */
+.sidebar nav a {
+  display: block;
+  text-decoration: none;
+  font-weight: 600;
+  color: #3b3b3b;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+}
+
+/* 3. Hover effect — like employee */
+.sidebar nav a:hover {
+  background: rgba(217,163,255,0.20);
+  transform: translateX(6px);
+  box-shadow: 0 4px 12px rgba(180,120,255,0.18);
+  color: #6a1b9a;
+}
+
+/* 4. Active item (same pill style as employee) */
+.sidebar nav a.active {
+  background: rgba(217,163,255,0.35);
+  color: #6a1b9a;
+  font-weight: 700;
+}
+
+/* 5. CRM dropdown toggle matching style */
+.sidebar .dropdown-toggle {
+  display: block;
+  padding: 0.8rem 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  color: #3b3b3b;
+  transition: all 0.25s ease;
+}
+
+/* hover + active match */
+.sidebar .dropdown-toggle:hover {
+  background: rgba(217,163,255,0.20);
+  transform: translateX(6px);
+  box-shadow: 0 4px 12px rgba(180,120,255,0.18);
+  color: #6a1b9a;
+}
+
+/* 6. Dropdown submenu (keep functionality, just softer) */
+.sidebar-submenu a {
+  padding: 8px 16px;
+  display: block;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  color: #3b3b3b;
+  margin-left: 8px;
+  transition: all 0.2s ease;
+}
+
+.sidebar-submenu a:hover {
+  background: #f3f0ff;
+  color: #6a1b9a;
+}
+
+/* 7. Remove old dark theme colors if applied */
+.sidebar {
+  background-image: none !important;
+}

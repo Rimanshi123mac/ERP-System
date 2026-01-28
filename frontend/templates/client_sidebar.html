@@ -1,0 +1,35 @@
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="{{ url_for('static', filename='images/N_logo.png') }}" alt="NishGrid" class="sidebar-logo-img">
+  </div>
+
+  <nav>
+    <a href="{{ url_for('client_dashboard') }}">Home</a>
+
+    {% if features.file_upload %}
+      <a href="{{ url_for('client_file_page') }}">Files</a>
+    {% endif %}
+
+    {% if features.view_meetings %}
+
+      <!-- <a href="{{ url_for('client_crm') }}">CRM</a>  -->
+
+      <div class="sidebar-dropdown">
+        <a href="javascript:void(0)" class="dropdown-toggle">CRM ▾</a>
+        <div class="sidebar-submenu">
+          <a href="{{ url_for('client_meetings') }}">CRM Meet</a>
+        </div>
+      </div>
+
+    {% endif %}
+
+    {% if features.client_app %}
+      <a href="{{ url_for('client_apps') }}">Client Apps</a>
+    {% endif %}
+
+    {% if features.raise_ticket %}
+      <a href="{{ url_for('raise_ticket_unified') }}">Raise Ticket</a>
+    {% endif %}
+  </nav>
+</aside>
+

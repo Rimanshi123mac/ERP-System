@@ -1,0 +1,26 @@
+.crm-page {
+  background: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+.crm-topbar {
+  background: linear-gradient(90deg, var(--header-bg), var(--primary));
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.crm-table-wrapper {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.crm-table thead {
+  background: var(--table-head);
+  color: #fff;
+}

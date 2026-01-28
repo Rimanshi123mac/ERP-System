@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Here</title>
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="background: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.65)), 
+             url('{{ url_for('static', filename='images/bg_img.jpg') }}') no-repeat center center/cover;">
+
+  <h1>One solution for all your web problems</h1>
+
+  <div class="register-container">
+    <h2>Register Now!</h2>
+<form id="registerForm" action="">
+    <div class="input-grp">
+      <input type="text" id="fullname" placeholder=" " required>
+      <label for="fullname">Full Name</label>
+    </div>
+
+    <div class="input-grp">
+      <input type="text" id="username" placeholder=" " required>
+      <label for="username">User Name</label>
+    </div>
+
+    <div class="input-grp">
+      <input type="email" id="email" placeholder=" " required>
+      <label for="email">Email Address</label>
+    </div>
+    <button type="button" id="verifyBtn" class="verify-btn">Verify Email</button>
+    <p id="verifyStatus" style="color: rgb(3, 59, 75); margin-top: 10px;"></p>
+
+    <!-- <div class="input-grp">
+      <select id="role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="admin">Admin</option>
+        <option value="employee">Employee</option>
+        <option value="client">Client</option>
+      </select>
+      <label for="role">Choose Role</label>
+    </div> -->
+
+    <div class="input-grp">
+      <input type="password" id="password" placeholder=" " required>
+      <label for="password">Password</label>
+      <span class="toggle-password" onclick="togglePassword()">Show</span>
+    </div>
+
+    <button type="submit" class="register-btn">Register</button>
+    </form>
+    <div class="extra-links">
+      <p>Already have an account? <a href="{{ url_for('login_page') }}">Login now</a></p>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script/register.js') }}"></script>
+</body>
+</html>

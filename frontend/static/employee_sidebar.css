@@ -1,0 +1,54 @@
+.employee-layout .layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+.menu li {
+  margin: 10px 0;
+}
+
+.menu a {
+  color: #dbe4ff;
+  text-decoration: none;
+  display: block;
+  padding: 10px 14px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.menu a:hover,
+.menu a.active {
+  background: #ffffff;
+  color: #1e3a5f;
+}
+
+/* CRM Dropdown */
+.sidebar-dropdown {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.submenu li {
+  margin: 5px 0;
+}
+
+.submenu a {
+  padding: 8px 14px;
+  font-size: 0.95rem;
+}
+
+.submenu.show {
+  display: block;
+}

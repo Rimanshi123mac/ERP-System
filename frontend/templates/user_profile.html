@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='user_profile.css') }}">
+</head>
+
+<body>
+  <h2>User Profile</h2>
+
+  <div class="profile-container">
+    <p><b>Full Name:</b> {{ user.fullname }}</p>
+    <p><b>Username:</b> {{ user.username }}</p>
+    <p><b>Email:</b> {{ user.email }}</p>
+    <p><b>Created At:</b> {{ user.created_at }}</p>
+    <p><b>Verified:</b> {{ "Yes" if user.is_verified else "No" }}</p>
+    <p><b>Approved:</b> {{ "Yes" if user.is_approved else "No" }}</p>
+    <p><b>Status:</b> {{ "Active" if user.is_active else "Inactive" }}</p>
+
+  
+    
+
+  <!-- Enable / Disable Access Button -->
+    <button 
+      id="toggleAccessButton"
+      class="btn {% if user.has_access %}btn-danger{% else %}btn-success{% endif %}"
+      onclick="toggleUserAccess({{ user.id }})">
+      {% if user.has_access %}Disable Access{% else %}Enable Access{% endif %}
+    </button>
+
+
+    <br><br>
+
+    
+    <form action="{{ url_for('update_user_role', user_id=user.id) }}" method="POST">
+      <label for="role">Assign Role:</label>
+      <select name="role" required>
+        <option value="client" {% if user.role == 'client' %}selected{% endif %}>Client</option>
+        <option value="employee" {% if user.role == 'employee' %}selected{% endif %}>Employee</option>
+        <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>Admin</option>
+      </select>
+      <br><br>
+      <button type="submit">Approve & Save</button>
+      <button type="submit">Reject</button>
+    </form>
+  </div>
+
+  <br>
+  <a href="{{ url_for('admin_rights') }}">Back to Dashboard</a>
+
+  <!--  Toggle Function -->
+  
+  <script>
+    function toggleUserAccess(userId) {
+      fetch(`/api/toggle_user_access/${userId}`, { method: "POST" })
+        .then(res => res.json())
+        .then(data => {
+          alert(data.message);
+          const btn = document.getElementById("toggleAccessButton");
+          if (data.new_access === 1) {
+            btn.textContent = "Disable Access";
+            btn.classList.remove("btn-success");
+            btn.classList.add("btn-danger");
+          } else {
+            btn.textContent = "Enable Access";
+            btn.classList.remove("btn-danger");
+            btn.classList.add("btn-success");
+          }
+        })
+        .catch(err => console.error("Error toggling access:", err));
+    }
+  </script>
+
+
+</body>
+</html>

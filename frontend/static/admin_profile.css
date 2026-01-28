@@ -1,0 +1,834 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Wrapper */
+.client-profile-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* HEADER */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.avatar-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.profile-name {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.profile-subtitle {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.profile-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.tab {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  background: #e5e7eb;
+  color: #000;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tab.active {
+  background: #1e88e5;
+  color: #ffffff;
+}
+
+/* CONTENT CARD */
+.profile-card {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* TAB CONTENT SWITCH */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* FORM ELEMENTS */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+.form-group input:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* Button */
+.btn-primary {
+  background: #1e88e5;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.45);
+}
+
+/* PASSWORD INPUT WRAPPER */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 42px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+}
+
+/* THEME OPTIONS */
+.theme-options {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+  margin-top: 8px;
+}
+
+.theme {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #cbd5e1;
+  transition: transform .2s ease;
+}
+
+.theme:hover {
+  transform: scale(1.07);
+}
+
+.theme.light { background: #ffffff; }
+.theme.dark { background: #2f2f2f; }
+.theme.aqua { background: #9ad9de; }
+.theme.green { background: #a7c7a1; }
+
+.theme.selected {
+  outline: 3px solid #2563eb;
+}
+
+/* FONT SETTINGS */
+.form-group-inline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+/* BOLD TOGGLE */
+.bold-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* SWITCH */
+.switch {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #cbd5e1;
+  border-radius: 22px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 2px;
+  bottom: 2px;
+  background: #fff;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.switch input:checked + .slider {
+  background: #2563eb;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(18px);
+}
+
+.bold-label {
+  font-size: 14px;
+}
+
+/* DARK THEME FOR MAIN WRAPPER */
+.main-wrapper.theme-dark,
+.main-wrapper.theme-dark .profile-card,
+.main-wrapper.theme-dark .profile-header{
+  color: #ffffff !important;
+}
+
+.main-wrapper.theme-dark .toggle-password {
+  color: #ffffff !important;
+}
+
+
+.main-wrapper.theme-dark .profile-card {
+  background: rgba(47,47,47,0.9) !important;
+}
+
+.main-wrapper.theme-dark input,
+.main-wrapper.theme-dark select,
+.main-wrapper.theme-dark textarea {
+  background: rgba(255,255,255,0.1) !important;
+  border-color: rgba(255,255,255,0.2) !important;
+  color: #ffffff !important;
+}
+
+.main-wrapper.theme-dark input::placeholder,
+.main-wrapper.theme-dark textarea::placeholder {
+  color: rgba(255,255,255,0.6) !important;
+}
+
+/* SELECT OPTIONS ALWAYS BLACK */
+select option {
+  color: #000 !important;
+  background: #fff !important;
+}
+
+/* THEMES FOR EMPLOYEE PROFILE */
+
+.main-wrapper.theme-light {
+  background: #f8fafc;
+  color: #111;
+}
+
+.main-wrapper.theme-dark {
+  background: #1e1e1e;
+  color: #fff;
+}
+
+.main-wrapper.theme-aqua {
+  background: #d8f7fa;
+  color: #083c4a;
+}
+
+.main-wrapper.theme-green {
+  background: #e6f6e6;
+  color: #0e3a0f;
+}
+
+
+.main-wrapper.theme-dark .profile-card {
+  background: rgba(47,47,47,0.9);
+}
+
+/* Fix for dark mode text labels in Appearance tab */
+.main-wrapper.theme-dark .profile-card label,
+.main-wrapper.theme-dark .section-title,
+.main-wrapper.theme-dark .form-group-inline select,
+.main-wrapper.theme-dark .bold-label {
+  color: #ffffff !important;
+}
+
+.profile-tabs .tab{
+  color: #070606;
+}
+
+.main-wrapper {
+  --font-family: Poppins;
+  --font-size: 16px;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}
+
+.main-wrapper.font-bold * {
+  font-weight: 700 !important;
+}
+
+.profile-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 24px;
+  color: var(--card-text);
+  box-shadow: 0 4px 18px var(--card-shadow);
+  margin-bottom: 28px;
+  transition: all 0.25s ease;
+}
+
+/* Dark Theme */
+.theme-dark .profile-card {
+  --card-bg: var(--theme-dark-card);
+  --card-border: #3b3b3b;
+  --card-text: #f2f2f2;
+  --card-shadow: rgba(0,0,0,0.7);
+}
+
+/* Aqua Theme */
+.theme-aqua .profile-card {
+  --card-bg: var(--theme-aqua-card);
+  --card-border: #9de6ff;
+  --card-text: #073b52;
+  --card-shadow: rgba(0,100,150,0.25);
+}
+
+/* Green Theme */
+.theme-green .profile-card {
+  --card-bg: var(--theme-green-card);
+  --card-border: #8fd9a8;
+  --card-text: #08351d;
+  --card-shadow: rgba(0,150,60,0.25);
+}
+
+.profile-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 18px 0 24px;
+}
+
+.profile-tab {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background: rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: 0.25s;
+  font-weight: 600;
+}
+
+.profile-tab.active {
+  background: #0078ff;
+  color: white;
+  border-color: #0059cc;
+  box-shadow: 0 0 14px rgba(0,120,255,0.4);
+}
+
+/* Dark */
+.theme-dark .profile-tab {
+  background: #2e2e2e;
+  color: #eee;
+}
+.theme-dark .profile-tab.active {
+  background: #005eff;
+}
+
+/* Aqua */
+.theme-aqua .profile-tab {
+  background: rgba(0,140,255,0.12);
+  color: #005fa7;
+}
+.theme-aqua .profile-tab.active {
+  background: #0078ff;
+}
+
+/* Green */
+.theme-green .profile-tab {
+  background: rgba(0,180,80,0.15);
+  color: #064b24;
+}
+.theme-green .profile-tab.active {
+  background: #14ae5c;
+  border-color: #0d8c48;
+}
+
+/* =========================================
+   BASE RESET / SHARED RULES
+========================================= */
+.client-profile-page {
+  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.avatar-circle {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.profile-name {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.profile-subtitle {
+  margin: 0;
+  font-size: 14px;
+  opacity: .8;
+}
+
+/* =========================================
+   TABS
+========================================= */
+.profile-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.profile-tabs .tab {
+  padding: 7px 18px;
+  border: none;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.08);
+  cursor: pointer;
+  font-weight: 600;
+  transition: .2s;
+}
+
+.profile-tabs .tab.active {
+  background: #007bff;
+  color: white;
+  box-shadow: 0 0 10px rgba(0,120,255,0.4);
+}
+
+/* DARK THEME TABS */
+.theme-dark .profile-tabs .tab {
+  background: #2e2e2e;
+  color: #e9e9e9;
+}
+.theme-dark .profile-tabs .tab.active {
+  background: #005eff;
+  color: white;
+}
+
+/* AQUA THEME TABS */
+.theme-aqua .profile-tabs .tab {
+  background: rgba(0,140,255,0.12);
+  color: #005fa7;
+}
+.theme-aqua .profile-tabs .tab.active {
+  background: #0078ff;
+  color: white;
+}
+
+/* GREEN THEME TABS */
+.theme-green .profile-tabs .tab {
+  background: rgba(0,180,80,0.15);
+  color: #064b24;
+}
+.theme-green .profile-tabs .tab.active {
+  background: #14ae5c;
+  color: white;
+}
+
+/* =========================================
+   PROFILE CARD THEME STYLING
+========================================= */
+.profile-card {
+  padding: 28px;
+  border-radius: 14px;
+  border: 1px solid var(--card-border, #e0e0e0);
+  background: var(--card-bg, #ffffff);
+  color: var(--card-text, #111);
+  box-shadow: 0 4px 18px var(--card-shadow, rgba(0,0,0,0.1));
+  transition: .25s;
+}
+
+/* LIGHT DEFAULT */
+:root {
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --card-text: #111;
+  --card-shadow: rgba(0,0,0,0.12);
+}
+
+/* DARK THEME */
+.theme-dark .profile-card {
+  --card-bg: #1f1f1f;
+  --card-border: #333;
+  --card-text: #efefef;
+  --card-shadow: rgba(0,0,0,0.6);
+}
+
+/* AQUA THEME */
+.theme-aqua .profile-card {
+  --card-bg: #e8fcff;
+  --card-border: #98e5ff;
+  --card-text: #063c52;
+  --card-shadow: rgba(0,120,150,0.25);
+}
+
+/* GREEN THEME */
+.theme-green .profile-card {
+  --card-bg: #ecfff4;
+  --card-border: #7ed9a3;
+  --card-text: #053d19;
+  --card-shadow: rgba(0,150,60,0.25);
+}
+
+/* =========================================
+   TAB CONTENT
+========================================= */
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+
+/* =========================================
+   FORMS
+========================================= */
+.form-group {
+  margin-bottom: 18px;
+}
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #fafafa;
+  font-size: 15px;
+}
+
+.theme-dark .form-group input,
+.theme-dark .form-group select {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  color: white;
+}
+.theme-aqua .form-group input,
+.theme-aqua .form-group select {
+  background: #f1fdff;
+  border: 1px solid #86d7ef;
+}
+.theme-green .form-group input,
+.theme-green .form-group select {
+  background: #f2fff5;
+  border: 1px solid #8fd9a8;
+}
+
+/* =========================================
+   PASSWORD WRAPPER
+========================================= */
+.password-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.password-wrapper input {
+  width: 100%;
+}
+.toggle-password {
+  margin-left: 8px;
+  font-size: 13px;
+  color: #007bff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.theme-dark .toggle-password {
+  color: #4d8aff;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+.btn-primary {
+  background: #007bff;
+  padding: 10px 18px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: .2s;
+}
+.btn-primary:hover {
+  background: #005fcc;
+}
+
+.theme-dark .btn-primary {
+  background: #005eff;
+}
+.theme-aqua .btn-primary {
+  background: #0097e6;
+}
+.theme-green .btn-primary {
+  background: #18b761;
+}
+
+/* =========================================
+   APPEARANCE SECTION
+========================================= */
+.theme-options {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.theme-options .theme {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.theme.light { background: white; border: 1px solid #ddd; }
+.theme.dark { background: #1e1e1e; }
+.theme.aqua { background: #76d7ff; }
+.theme.green { background: #68e28c; }
+.theme.selected {
+  border-color: #005eff;
+}
+
+/* =========================================
+   SWITCH TOGGLE (Bold)
+========================================= */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 22px;
+}
+.switch input { display:none; }
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background: #ccc;
+  border-radius: 22px;
+  top: 0; left: 0; right: 0; bottom: 0;
+  transition: .3s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  background: white;
+  left: 3px;
+  bottom: 3px;
+  border-radius: 50%;
+  transition: .3s;
+}
+.switch input:checked + .slider {
+  background: #007bff;
+}
+.switch input:checked + .slider:before {
+  transform: translateX(24px);
+}
+.bold-label {
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   PROFILE CARD - THEME AWARE VISUAL
+========================================= */
+
+.profile-card {
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--card-border, #d8dee6);
+    background: var(--card-bg, #ffffff);
+    box-shadow: var(--card-shadow, 0 3px 12px rgba(0,0,0,0.08));
+    color: var(--card-text, #111);
+    transition: .25s ease;
+}
+
+/* ---------- LIGHT DEFAULT ---------- */
+:root {
+    --card-bg: #ffffff;
+    --card-border: #d0dae4;
+    --card-text: #0f141a;
+    --card-shadow: 0 4px 15px rgba(0,0,0,0.10);
+}
+
+/* ---------- DARK THEME ---------- */
+.theme-dark .profile-card {
+    --card-bg: #1e1e1e;
+    --card-border: #333;
+    --card-text: #efefef;
+    --card-shadow: 0 4px 16px rgba(0,0,0,0.6);
+}
+
+/* ---------- AQUA THEME ---------- */
+.theme-aqua .profile-card {
+    --card-bg: #e6fbff;
+    --card-border: #8ad3ea;
+    --card-text: #03485a;
+    --card-shadow: 0 4px 16px rgba(0,140,200,0.3);
+}
+
+/* ---------- GREEN THEME ---------- */
+.theme-green .profile-card {
+    --card-bg: #eafff1;
+    --card-border: #7ed7a3;
+    --card-text: #064d26;
+    --card-shadow: 0 4px 16px rgba(0,150,80,0.25);
+}
+
+/* =========================================
+   INPUTS INSIDE CARD (THEME MATCHING)
+========================================= */
+.profile-card input {
+    background: var(--input-bg, #f7f8fa);
+    border: 1px solid var(--input-border, #cfd9e3);
+    color: var(--input-text, #0f141a);
+}
+
+/* DARK */
+.theme-dark .profile-card input {
+    --input-bg: #2a2a2a;
+    --input-border: #444;
+    --input-text: #eaeaea;
+}
+
+/* AQUA */
+.theme-aqua .profile-card input {
+    --input-bg: #f0fdff;
+    --input-border: #8bd7ec;
+    --input-text: #044852;
+}
+
+/* GREEN */
+.theme-green .profile-card input {
+    --input-bg: #f0fff5;
+    --input-border: #8dd9a6;
+    --input-text: #064d26;
+}
+
+/* ---------- PROFILE CARD THEME OVERRIDES (FINAL WINNERS) ---------- */
+.theme-dark .profile-card {
+    --card-bg: #1e1e1e;
+    --card-border: #333;
+    --card-text: #efefef;
+    --card-shadow: rgba(0,0,0,0.7);
+}
+
+.theme-aqua .profile-card {
+    --card-bg: #e6fbff;
+    --card-border: #8ad3ea;
+    --card-text: #03485a;
+    --card-shadow: rgba(0,140,200,0.3);
+}
+
+.theme-green .profile-card {
+    --card-bg: #eafff1;
+    --card-border: #7ed7a3;
+    --card-text: #064d26;
+    --card-shadow: rgba(0,150,80,0.25);
+}
+
+.profile-card {
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid var(--card-border, #d8dee6);
+  background: var(--card-bg, #ffffff);
+  color: var(--card-text, #111);
+  box-shadow: 0 4px 12px var(--card-shadow, rgba(0,0,0,0.12));
+  transition: .25s ease;
+}
+
+.theme-aqua .profile-card input,
+.theme-aqua .profile-card select {
+  background: #f0fdff;
+  border-color: #8bd7ec;
+  color: #03485a;
+}
+
+.theme-green .profile-card input,
+.theme-green .profile-card select {
+  background: #f0fff5;
+  border-color: #8dd9a6;
+  color: #064d26;
+}

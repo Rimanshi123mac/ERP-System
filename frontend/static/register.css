@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.65)),  */
+                /* url('/frontend/static/images/bg_img.jpg') no-repeat center center/cover; */
+}
+
+h1 {
+    margin-top: 0px;
+    text-align: center;
+    font-size: 32px;
+    color: black;
+}
+
+.register-container {
+    width: 420px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.register-container h2 {
+    margin-bottom: 30px;
+    font-size: 26px;
+    color: #333;
+}
+
+.input-grp {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+/* -------------------------------------------------------------- */
+
+.input-grp input, 
+.input-grp select {
+    width: 100%;
+    padding: 16px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+.input-grp label {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    font-size: 15px;
+    color: #777;
+    pointer-events: none;
+    transition: 0.3s ease all;
+    background: #fff;
+    padding: 0 4px;
+}
+
+.input-grp input:focus + label, 
+.input-grp input:not(:placeholder-shown) + label,
+.input-grp select:focus + label,
+.input-grp select:valid + label {
+    top: -8px;
+    left: 12px;
+    font-size: 12px;
+    color: #5FA8D3;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #5fa8d3, #1e3a8a);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.register-btn:hover {
+    background: linear-gradient(135deg, #1e3a8a, #9d174d);
+}
+
+.extra-links {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.extra-links a:hover {
+    text-decoration: underline;
+    color: #0687d2;
+}
+
+.password-container {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #555;
+}
+
+.toggle-password:hover {
+  color: #000;
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

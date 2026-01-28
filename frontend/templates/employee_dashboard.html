@@ -1,0 +1,23 @@
+{% extends "layouts/employee_base.html" %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="page-center  dashboard-center">
+
+  <img src="{{ url_for('static', filename='images/N_logo.png') }}"
+       alt="NishGrid Logo"
+       class="dashboard-logo">
+
+  <h1 class="dashboard-title">
+    Welcome to <span>NishGrid</span>
+  </h1>
+
+  <p class="dashboard-subtitle">
+    Your smart ERP solution
+  </p>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,166 @@
+{% extends "layouts/client_base.html" %}
+
+{% block page_title %}Raise a ticket{% endblock %}
+
+{% block content %}
+<div class="ticket-container">
+  <div class="ticket-card">
+
+    <h2>Raise a ticket</h2>
+
+    <form id="ticketForm" action="{{ url_for('submit_ticket') }}" method="post" enctype="multipart/form-data">
+
+      <div id="ticketError" class="alert alert-danger" style="display:none; margin-bottom: 12px;"></div>
+
+      <div class="ticket-grid">
+
+        <label>Attachment</label>
+        <input type="file" name="file">
+
+        <label>File description</label>
+        <input type="text" name="file_desc" class="form-control">
+
+        <label>Name</label>
+        <input type="text" name="name" class="form-control">
+
+        <label>Email</label>
+        <input type="email" name="email" class="form-control">
+
+        <label>Issue type</label>
+        <input type="text" name="issue_type" class="form-control">
+
+        <label>Details</label>
+        <textarea name="details" rows="3" class="form-control"></textarea>
+
+      </div>
+
+      <div class="ticket-actions">
+        <a href="{{ url_for('client_dashboard') }}" class="btn btn-secondary">Back</a>
+        <button type="submit" class="btn btn-primary">Submit ticket</button>
+      </div>
+
+    </form>
+
+<div id="ticketSuccessModal" class="ticket-modal">
+  <div class="ticket-modal-box">
+     <button class="modal-close" onclick="closeTicketSuccess()">×</button>
+    <h3>Ticket Submitted</h3>
+    <p>Your ticket has been submitted successfully.</p>
+    <p>Redirecting to <strong>My Tickets</strong> </p>
+  </div>
+</div>
+
+    <div class="ticket-actions">
+      <a href="javascript:void(0)" class="btn-view" onclick="openTickets()">
+        View My Tickets
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<div id="ticketsModal" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeTickets()">×</button>
+    <div id="ticketsContent">
+      Loading...
+    </div>
+  </div>
+</div>
+
+<!-- 
+<script>
+
+  document.querySelector("form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const form = this;
+    const formData = new FormData(form);
+
+    const res = await fetch(form.action, {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await res.json();
+
+    if (data.status === "success") {
+      const modal = document.getElementById("ticketSuccessModal");
+      modal.classList.remove("hidden");
+
+      setTimeout(() => {
+        window.location.href = "/my-tickets";
+      }, 2000);
+    }
+  });
+
+</script> -->
+
+<script>
+
+document.getElementById("ticketForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const form = this;
+  const formData = new FormData(form);
+  const errBox = document.getElementById("ticketError");
+  if (errBox) {
+    errBox.style.display = "none";
+    errBox.textContent = "";
+  }
+
+  fetch(form.action, {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.status === "success") {
+      document.getElementById("ticketSuccessModal").style.display = "flex";
+      setTimeout(() => {
+        openTickets();  
+      }, 2000);
+    } else {
+      // Show inline error (no browser alerts)
+      if (errBox) {
+        errBox.textContent = data.error || "Ticket submit failed. Please try again.";
+        errBox.style.display = "block";
+      }
+    }
+  })
+  .catch(err => {
+    // No browser alert; keep it quiet.
+    if (errBox) {
+      errBox.textContent = "Ticket submit failed. Please try again.";
+      errBox.style.display = "block";
+    }
+  });
+});
+
+function showTicketSuccess() {
+  document.getElementById("ticketSuccessModal").style.display = "flex";
+
+  setTimeout(() => {
+    window.location.href = "{{ url_for('my_tickets') }}";
+  }, 2500);
+}
+
+function closeTicketSuccess() {
+  document.getElementById("ticketSuccessModal").style.display = "none";
+}
+
+document.getElementById("ticketSuccessModal").addEventListener("click", function(e) {
+  if (e.target === this) {
+    closeTicketSuccess();
+  }
+});
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    closeTicketSuccess();
+  }
+});
+</script>
+
+
+{% endblock %}

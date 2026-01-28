@@ -1,0 +1,53 @@
+{% extends "layouts/employee_base.html" %}
+
+{% block page_title %}CRM{% endblock %}
+
+{% block content %}
+<div class="crm-page">
+
+  
+  <div class="crm-topbar">
+    <div class="crm-title">My CRM</div>
+
+    <div class="crm-actions">
+    
+      <a href="{{ url_for('employee_add_customer') }}" class="btn btn-primary btn-add">
+      <i class="bi bi-plus-lg"></i>
+      </a>
+      
+      <a href="{{ url_for('employee_crm_meetings') }}" class="btn btn-secondary">
+        CRM Meet
+      </a>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="crm-table-wrapper">
+    <table class="crm-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Username</th>
+          <th>Full Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in customers %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ c.name }}</td>
+          <td>{{ c.fullname }}</td>
+          <td>{{ c.email }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="4" style="text-align:center;">No customers assigned.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% endblock %}

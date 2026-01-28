@@ -1,0 +1,106 @@
+{% extends "layouts/client_base.html" %}
+
+{% block page_title %}CRM Meet{% endblock %}
+
+{% block content %}
+<div class="crm-page">
+
+  <div class="crm-topbar">
+    <div class="crm-title">CRM Meet</div>
+    
+  </div>
+
+  <div class="crm-table-wrapper">
+    <table class="crm-table">
+      <thead>
+        <tr>
+          <th><span class="th-flex">
+              <strong>#</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+              </span>
+          </th>
+          <th><span class="th-flex">
+              <strong>Customer Name</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </span>
+          </th>
+          <th><span class="th-flex">
+              <strong>Date</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+              </span></th>
+          <th><span class="th-flex">
+              <strong>Time</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+              </span></th>
+          <th><span class="th-flex">
+              <strong>Purpose</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+              </span></th>
+          <th><span class="th-flex">
+              <strong>Status</strong>
+              <i class="bi bi-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+              </span></th>
+          <!-- <th>Notes</th> -->
+        </tr>
+      </thead>
+      <tbody id="meetingBody">
+        {% for m in meetings %}
+        <tr data-client="{{ m.employee_name }}">
+          <td>{{ loop.index }}</td>
+          <td>{{ m.employee_name }}</td>
+          <td>{{ m.meeting_date }}</td>
+          <td>{{ m.meeting_time }}</td>
+          <td>{{ m.purpose }}</td>
+          <td>{{ m.status }}</td>
+          <!-- <td>{{ m.notes }}</td> -->
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="7" style="text-align:center;">No meetings found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+        <div class="pagination-bar">
+      Rows per page:
+      <select disabled>
+        <option>50</option>
+      </select>
+      <span>1-{{ files|length }} of {{ files|length }}</span>
+      <span class="pagination-arrows">◀ ▶</span>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- <script>
+document.getElementById("customerSelect").addEventListener("change", function () {
+  const value = this.value;
+  document.querySelectorAll("#meetingBody tr").forEach(function (row) {
+    const client = row.getAttribute("data-client");
+    row.style.display = (!value || client === value) ? "" : "none";
+  });
+});
+</script> -->
+
+<script>
+document.getElementById("customerSelect").addEventListener("change", function () {
+  const value = this.value;
+  document.querySelectorAll("#meetingBody tr").forEach(function (row) {
+    const client = row.getAttribute("data-client");
+    row.style.display = (!value || client === value) ? "" : "none";
+  });
+});
+</script>
+
+
+{% endblock %}
+
+  

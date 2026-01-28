@@ -1,0 +1,58 @@
+
+
+{% extends "layouts/employee_base.html" %}
+
+{% block page_title %}Meetings{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+  <h2 class="text-center title mb-4">Your Meetings</h2>
+
+  {% if meetings|length == 0 %}
+    <p class="text-center text-muted">No meetings scheduled currently.</p>
+  {% else %}
+    <div class="row">
+
+      {% for m in meetings %}
+      <div class="col-md-4 mb-4">
+        <div class="meeting-card">
+
+          <h5 class="mb-2">{{ m.meeting_title }}</h5>
+
+          <p><strong>Date:</strong> {{ m.meeting_date }}</p>
+          <p><strong>Time:</strong> {{ m.meeting_time }}</p>
+          <p><strong>Client:</strong> {{ m.client_name }}</p>
+
+          <p>
+            <strong>Status:</strong>
+            {% if m.final_status == "Upcoming" %}
+              <span class="badge bg-info text-white">Upcoming</span>
+            {% elif m.final_status == "Completed" %}
+              <span class="badge bg-success text-white">Completed</span>
+            {% elif m.final_status == "Cancelled" %}
+              <span class="badge bg-danger text-white">Cancelled</span>
+            {% else %}
+              <span class="badge bg-secondary text-white">Unknown</span>
+            {% endif %}
+          </p>
+
+          {% if m.employee_remarks %}
+            <p><strong>Your Remarks:</strong><br>{{ m.employee_remarks }}</p>
+          {% endif %}
+
+          {% if m.client_remarks %}
+            <p><strong>Client Remarks:</strong><br>{{ m.client_remarks }}</p>
+          {% endif %}
+
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "layouts/client_base.html" %} Client Apps {# if you have a client base layout #}
+
+{% block title %}Client Apps{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='client_apps.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="main-wrapper">
+
+  <div class="apps-header">
+    <h2>Web Apps</h2>
+  </div>
+
+  <div class="apps-grid">
+    {% if apps %}
+      {% for app in apps %}
+      <div class="app-card">
+        <div class="card-content">
+          <div class="app-logo">
+            <img src="{{ url_for('static', filename='images/N_logo.png') }}" alt="Logo">
+          </div>
+          <div>
+            <h4 class="app-name">{{ app.name }}</h4>
+            <p class="app-desc">{{ app.description }}</p>
+          </div>
+        </div>
+        <div class="app-actions">
+          {% if app.file_path %}
+          <a class="btn btn-primary btn-sm" href="{{ url_for('download_client_app', app_id=app.id) }}" title="Download App" download>
+            <i class="fa-solid fa-download"></i> Download
+          </a>
+          {% else %}
+          <span class="text-muted">No file available</span>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="alert alert-info text-center" style="grid-column: 1 / -1;">
+        <p>No apps available. Contact admin to grant access to apps.</p>
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+
+{% endblock %}

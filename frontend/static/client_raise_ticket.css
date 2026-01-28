@@ -1,0 +1,310 @@
+.ticket-container {
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.ticket-card {
+    padding: 20px 24px;
+    background: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.ticket-card h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.ticket-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    grid-row-gap: 10px;
+    grid-column-gap: 12px;
+    align-items: center;
+}
+
+.ticket-grid label {
+    font-weight: 500;
+}
+
+.ticket-grid .form-control {
+    width: 100%;
+    padding: 6px 8px;
+    box-sizing: border-box;
+}
+
+.ticket-actions {
+    margin-top: 18px;
+    text-align: right;
+}
+
+.ticket-actions .btn {
+    padding: 6px 14px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
+
+.ticket-actions .btn-primary {
+    background: #007bff;
+    color: #fff;
+}
+
+.ticket-actions .btn-secondary {
+    background: #cccccc;
+    color: #000;
+    margin-right: 8px;
+}
+
+.ticket-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.ticket-modal-box {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  width: 360px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  animation: popup 0.35s ease;
+}
+
+.ticket-modal-box h3 {
+  color: #2e7d32;
+  margin-bottom: 10px;
+}
+
+@keyframes popup {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.ticket-container {
+  padding: 40px;
+}
+
+.ticket-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+  max-width: 850px;
+}
+
+.ticket-grid {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 14px 18px;
+  margin-top: 16px;
+}
+
+.ticket-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.ticket-card h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #1e293b;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  font-size: 14px;
+}
+/* ===== DARK THEME FOR RAISE TICKET ===== */
+.main-wrapper.theme-dark .ticket-card {
+  background: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #333 !important;
+  box-shadow: none !important;
+}
+
+.main-wrapper.theme-dark .ticket-card h2 {
+  color: #ffffff !important;
+}
+
+.main-wrapper.theme-dark label {
+  color: #e0e0e0 !important;
+}
+
+/* Inputs */
+.main-wrapper.theme-dark .form-control,
+.main-wrapper.theme-dark input[type="file"],
+.main-wrapper.theme-dark select,
+.main-wrapper.theme-dark textarea {
+  background: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  color: #ffffff !important;
+}
+
+.main-wrapper.theme-dark .form-control::placeholder,
+.main-wrapper.theme-dark textarea::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Buttons */
+.main-wrapper.theme-dark .btn-primary {
+  background: #2563eb !important;
+  color: white !important;
+  border: none !important;
+}
+
+.main-wrapper.theme-dark .btn-secondary {
+  background: #444 !important;
+  color: white !important;
+  border: none !important;
+}
+
+/* "View My Tickets" button */
+.main-wrapper.theme-dark .btn-view {
+  color: #4ade80 !important;
+  text-decoration: underline;
+}
+.main-wrapper.theme-dark .btn-view:hover {
+  color: #22c55e !important;
+}
+
+/* Error alert box */
+.main-wrapper.theme-dark .alert-danger {
+  background: #4b1515 !important;
+  color: #ffb3b3 !important;
+  border: 1px solid #803333 !important;
+}
+
+/* Success modal */
+.main-wrapper.theme-dark .ticket-modal-box {
+  background: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #333 !important;
+}
+
+/* ==========================================
+   LIGHT THEME (Default)
+========================================== */
+.main-wrapper.theme-light .ticket-card {
+  background: #ffffff !important;
+  color: #1e293b !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
+}
+
+.main-wrapper.theme-light label {
+  color: #334155 !important;
+}
+
+.main-wrapper.theme-light .form-control,
+.main-wrapper.theme-light input[type="file"],
+.main-wrapper.theme-light select,
+.main-wrapper.theme-light textarea {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #1e293b !important;
+}
+
+.main-wrapper.theme-light .btn-primary {
+  background: #2563eb !important;
+  color: white !important;
+}
+
+.main-wrapper.theme-light .btn-secondary {
+  background: #e2e8f0 !important;
+  color: #111 !important;
+}
+
+.main-wrapper.theme-light .btn-view {
+  color: #2563eb !important;
+  text-decoration: underline;
+}
+
+
+/* ==========================================
+   AQUA THEME
+========================================== */
+.main-wrapper.theme-aqua .ticket-card {
+  background: #e6fbff !important; /* slightly tinted */
+  color: #083344 !important;
+  border: 1px solid #bae6fd !important;
+  box-shadow: none !important;
+}
+
+.main-wrapper.theme-aqua label {
+  color: #083344 !important;
+}
+
+.main-wrapper.theme-aqua .form-control,
+.main-wrapper.theme-aqua input[type="file"],
+.main-wrapper.theme-aqua select,
+.main-wrapper.theme-aqua textarea {
+  background: #ffffff !important;
+  border: 1px solid #7dd3fc !important;
+  color: #083344 !important;
+}
+
+.main-wrapper.theme-aqua .btn-primary {
+  background: #0284c7 !important;
+  color: white !important;
+}
+
+.main-wrapper.theme-aqua .btn-secondary {
+  background: #bae6fd !important;
+  color: #083344 !important;
+}
+
+.main-wrapper.theme-aqua .btn-view {
+  color: #0284c7 !important;
+  text-decoration: underline;
+}
+
+
+/* ==========================================
+   GREEN THEME
+========================================== */
+.main-wrapper.theme-green .ticket-card {
+  background: #e8f7e8 !important;
+  color: #0a3710 !important;
+  border: 1px solid #bbf7d0 !important;
+  box-shadow: none !important;
+}
+
+.main-wrapper.theme-green label {
+  color: #0a3710 !important;
+}
+
+.main-wrapper.theme-green .form-control,
+.main-wrapper.theme-green input[type="file"],
+.main-wrapper.theme-green select,
+.main-wrapper.theme-green textarea {
+  background: #ffffff !important;
+  border: 1px solid #86efac !important;
+  color: #0a3710 !important;
+}
+
+.main-wrapper.theme-green .btn-primary {
+  background: #22c55e !important;
+  color: white !important;
+}
+
+.main-wrapper.theme-green .btn-secondary {
+  background: #bbf7d0 !important;
+  color: #0a3710 !important;
+}
+
+.main-wrapper.theme-green .btn-view {
+  color: #16a34a !important;
+  text-decoration: underline;
+}

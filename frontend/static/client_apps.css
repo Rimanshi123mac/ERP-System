@@ -1,0 +1,232 @@
+.apps-container {
+  padding: 20px 24px;
+  width: 100%;
+  height: 100%;
+}
+
+.apps-header h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: #111;
+}
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 22px;
+}
+
+.app-card {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  transition: all .25s ease;
+}
+
+.app-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.12);
+}
+
+.open-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  color: #555;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.open-btn:hover {
+  color: #111;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.app-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.app-name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  color: #1e293b;
+}
+
+.app-desc {
+  margin: 2px 0 0 0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* `````````````````````````````````````````````````````````````````` */
+.core-page {
+  background: #1f1f1f;
+  min-height: 100vh;
+  padding: 20px 32px;
+}
+
+.apps-top-card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.apps-top-card h2 {
+  margin: 0;
+  color: #3b6dd8;
+  font-weight: 600;
+}
+
+.section-title {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.apps-container {
+  padding: 0 4px;
+}
+
+.empty-text {
+  color: #fff;
+  font-size: 20x;
+  margin-top: 10px;
+}
+
+.empty-sub {
+  color: #fff;
+  font-size: 300x;
+  margin-top: 6px;
+}
+
+/* DEFAULT / LIGHT */
+.main-wrapper.theme-light {
+  --bg-page: #f5f7fa;
+  --bg-card: #ffffff;
+  --bg-header: #083a5f;
+  --text-primary: #1e3a5f;
+  --border-color: #d1d9e0;
+}
+
+/* AQUA */
+.main-wrapper.theme-aqua {
+  --bg-page: #d9f7ff;
+  --bg-card: #c3f0f9;
+  --bg-header: #046b99;
+  --text-primary: #034b6e;
+  --border-color: #8fd3e6;
+}
+
+/* GREEN */
+.main-wrapper.theme-green {
+  --bg-page: #d8f8e3;
+  --bg-card: #c1f2d3;
+  --bg-header: #047857;
+  --text-primary: #065f46;
+  --border-color: #7cd9ac;
+}
+
+/* DARK */
+.main-wrapper.theme-dark {
+  --bg-page: #111;
+  --bg-card: #1a1a1a;
+  --bg-header: #0a2538;
+  --text-primary: #d6e4ff;
+  --border-color: #333;
+}
+
+.crm-page {
+  padding: 30px;
+  min-height: calc(100vh - 90px);
+  background: var(--bg-page) !important;
+  color: var(--text-primary);
+}
+
+.crm-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.files-wrapper {
+  padding: 24px;
+  background: var(--bg-page) !important;
+}
+
+.table-container {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.crm-table thead {
+  background: var(--bg-header) !important;
+  color: white !important;
+}
+
+.pagination-bar {
+  background: var(--bg-card) !important;
+  border-top: 1px solid var(--border-color) !important;
+}
+
+.core-page {
+  background: var(--bg-page) !important;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.app-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color);
+}
+
+.main-wrapper.theme-dark .empty-text,
+.main-wrapper.theme-dark .empty-sub {
+  color: #e0e0e0 !important;
+}
+
+/* Default for light backgrounds */
+.empty-text, .empty-sub {
+  color: #2a2a2a !important;   /* dark text */
+  font-size: 15px;
+  text-align: center;
+}
+
+/* DARK THEME OVERRIDE */
+.main-wrapper.theme-dark .empty-text,
+.main-wrapper.theme-dark .empty-sub {
+  color: #e0e0e0 !important;   /* light text */
+}
+
+/* AQUA / GREEN THEMES OVERRIDE */
+.main-wrapper.theme-aqua .empty-text,
+.main-wrapper.theme-aqua .empty-sub,
+.main-wrapper.theme-green .empty-text,
+.main-wrapper.theme-green .empty-sub {
+  color: #0b3a53 !important;   /* deep teal, readable */
+}

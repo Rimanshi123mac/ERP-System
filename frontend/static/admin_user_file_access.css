@@ -1,0 +1,49 @@
+body {
+    font-family: Poppins, sans-serif;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.user-info p {
+    margin: 4px 0;
+    font-size: 15px;
+}
+
+.search-box {
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.file-list {
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: #f8f9fc;
+    border: 1px solid #dce1f9;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.file-item:hover {
+    background: #eef1ff;
+    border-color: #b9c4ff;
+}
+
+.file-name {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.file-actions button {
+    margin-left: 10px;
+}

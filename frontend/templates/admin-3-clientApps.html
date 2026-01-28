@@ -1,0 +1,205 @@
+{% extends "layouts/admin_base.html" %}
+{% block page_title %}Client Apps{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='admin-3-clientApps.css') }}">
+
+<!-- <div class="admin-section-container">
+
+  <div class="section-header">
+    <h3 class="title">Client Softwares</h3>
+    <button class="fab-btn" data-bs-toggle="modal" data-bs-target="#addAppModal">
+        +
+    </button>
+  </div>
+
+
+
+<div class="apps-section">
+
+  {% if apps|length == 0 %}
+    <p class="text-muted text-center mt-3">No softwares uploaded yet.</p>
+  {% endif %}
+
+  <div class="software-grid">
+
+    {% for app in apps %}
+    <div class="software-card">
+
+      <div class="software-logo">
+        <img src="{{ url_for('static', filename='uploads/client-apps/' ~ app.logo_path) }}">
+      </div>
+
+      <div class="software-info">
+        <h4>{{ app.name }}</h4>
+        <p>{{ app.description }}</p>
+      </div>
+
+      <div class="software-actions">
+        <a href="{{ app.app_url }}" target="_blank" class="open-btn">Open</a>
+        <form method="POST" action="{{ url_for('admin_delete_client_app', app_id=app.id) }}"
+              onsubmit="return confirm('Delete this app?')" style="display:inline;">
+          <button type="submit" class="delete-btn">Remove</button>
+        </form>
+      </div>
+
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+
+</div> -->
+
+
+<div class="admin-section-container">
+    <button id="openAppPopupBtn" class="fab-btn">+</button>
+    <!-- Header + Floating Add Button -->
+    <div class="section-header">
+        <h3 class="title">Client Softwares</h3>
+        
+    </div>
+
+    <!-- No apps case -->
+    {% if apps|length == 0 %}
+        <p class="text-muted">No softwares uploaded yet.</p>
+    {% endif %}
+
+    <div class="software-grid">
+        {% for app in apps %}
+        <div class="software-card">
+            <div class="software-logo">
+                <img src="{{ url_for('static', filename='images/N_logo.png') }}" alt="Logo">
+            </div>
+            <div class="software-info">
+                <h4>{{ app.name }}</h4>
+                <p>{{ app.description }}</p>
+            </div>
+
+            <div class="software-actions">
+                {% if app.file_path %}
+                <a href="{{ url_for('download_client_app', app_id=app.id) }}" class="open-btn">
+                    <i class="bi bi-download"></i> Download
+                </a>
+                {% endif %}
+                <form method="POST" action="{{ url_for('admin_delete_client_app', app_id=app.id) }}"
+                      onsubmit="return confirm('Delete this app?')" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                    <button type="submit" class="delete-btn">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+<!-- <div class="modal fade" id="addAppModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <form method="POST" action="{{ url_for('admin_add_client_app') }}"
+          enctype="multipart/form-data" class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold">Add Software</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <label class="form-label">Name</label>
+        <input name="name" class="form-control mb-3" placeholder="Enter software name" required>
+
+        <label class="form-label">Description</label>
+        <textarea name="description" class="form-control mb-3" placeholder="Enter description" required></textarea>
+
+        <label class="form-label">App URL</label>
+        <input name="app_url" type="url" class="form-control mb-3"
+               placeholder="https://example.com" required>
+
+        <label class="form-label">Logo</label>
+        <input name="logo" type="file" accept="image/*" class="form-control" required>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" type="submit">Upload</button>
+      </div>
+
+    </form>
+  </div>
+</div> -->
+
+<!-- <button id="openAppPopupBtn" class="fab-btn">+</button> -->
+
+<!-- <div id="appOverlay" class="overlay hidden"></div>
+
+<div id="appPopup" class="popup hidden">
+  <div class="popup-header">
+    <h3>Add Software</h3>
+    <span id="closeAppPopupBtn" class="close-btn">×</span>
+  </div>
+
+  <form id="appUploadForm" method="POST" action="{{ url_for('admin_add_client_app') }}" enctype="multipart/form-data">
+
+    <label>Name</label>
+    <input type="text" name="name" placeholder="Software name" required>
+
+    <label>Description</label>
+    <textarea name="description" placeholder="Short description..." required></textarea>
+
+    <label>App URL</label>
+    <input type="url" name="app_url" placeholder="https://example.com" required>
+
+    <label>Logo</label>
+    <input type="file" name="logo" accept="image/*" required>
+
+    <div class="btn-group">
+      <button type="button" id="cancelAppPopupBtn" class="cancel-btn">Cancel</button>
+      <button type="submit" class="upload-btn">Upload</button>
+    </div>
+
+  </form>
+</div> -->
+
+
+
+<div id="appOverlay" class="overlay hidden"></div>
+
+<div id="appPopup" class="popup hidden">
+  <div class="popup-header">
+    <h3>Add Software</h3>
+    <span id="closeAppPopupBtn" class="close-btn">×</span>
+  </div>
+
+  <form method="POST" action="{{ url_for('admin_add_client_app') }}" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+    <label>Name</label>
+    <input type="text" name="name" required placeholder="Software name">
+
+    <label>Description</label>
+    <textarea name="description" required placeholder="Short description..."></textarea>
+
+    <label>File (.exe or .tar only)</label>
+    <input type="file" name="file" accept=".exe,.tar" required>
+
+    <div class="btn-group">
+      <button type="button" id="cancelAppPopupBtn" class="cancel-btn">Cancel</button>
+      <button type="submit" class="upload-btn">Upload</button>
+    </div>
+
+  </form>
+</div>
+
+
+
+<script src="{{ url_for('static', filename='script/admin-3-clientApps.js') }}"></script>
+
+
+{% endblock %}

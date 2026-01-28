@@ -1,0 +1,144 @@
+{% extends "layouts/admin_base.html" %}
+
+{% block page_title %}File Upload Manager{% endblock %}
+
+{% block content %}
+
+<meta name="csrf-token" content="{{ csrf_token }}">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='admin-2-fileUpload.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-icons/bootstrap-icons.css') }}">
+
+<div class="file-wrapper">
+
+  <div class="file-header">
+    <h2>File Upload Manager</h2>
+  </div>
+
+  <button id="openFilePopupBtn" class="fab-btn">+</button>
+
+  <div class="file-search-wrapper">
+    <input type="text" id="fileSearch" placeholder="Search...">
+  </div>
+
+  <div class="table-container">
+    
+<table class="modern-table">
+
+<thead>
+  <tr>
+
+    <th>
+      <span class="th-flex"><strong>#</strong>
+        <i class="bi bi-arrow-up"></i>
+        <i class="bi bi-three-dots-vertical"></i>
+      </span>
+    </th>
+
+    <th>
+      <span class="th-flex">
+        <strong>Desc
+          <i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i>
+        </strong>
+      </span>
+    </th>
+    <th><span class="th-flex"><strong>FileName<i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i>
+    </strong></span></th>
+    <th><span class="th-flex"><strong>Public<i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></strong></span></th>
+    <th><span class="th-flex"><strong>Uploaded By<i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></strong></span></th>
+    <th><span class="th-flex"><strong>Uploaded At<i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></strong></span></th>
+    <th><strong>Download</strong></th>
+    <th><strong>Delete</strong></th>
+  </tr>
+</thead>
+
+
+  <tbody>
+    {% for file in files %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ file.description }}</td>
+      <td>{{ file.filename }}</td>
+      <td>
+        {% if file.status == 'Active' %}
+          <input type="checkbox" checked disabled>
+        {% else %}
+          <input type="checkbox" disabled>
+        {% endif %}
+      </td>
+      <td>{{ file.uploaded_by }}</td>
+      <td>{{ file.uploaded_at }}</td>
+
+
+      <td>
+  {% if perm.can_download %}
+  <a href="{{ url_for('download_file', filename=file.filename) }}" title="Download">
+    <i class="bi bi-download text-success"></i>
+  </a>
+  {% else %} No Access {% endif %}
+</td>
+
+<td>
+  {% if perm.can_delete %}
+  <a href="{{ url_for('delete_file', filename=file.filename) }}"
+     onclick="return confirm('Delete?')"
+     title="Delete">
+    <i class="bi bi-trash text-danger"></i>
+  </a>
+  {% else %} No Access {% endif %}
+</td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+<div class="pagination-bar">
+      Rows per page:
+      <select disabled>
+        <option>50</option>
+      </select>
+      <span>1-{{ files|length }} of {{ files|length }}</span>
+      <span class="pagination-arrows">◀ ▶</span>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- POPUP OVERLAY -->
+<div id="fileOverlay" class="overlay hidden"></div>
+
+<!-- POPUP WINDOW -->
+<div id="filePopup" class="popup hidden">
+
+  <div class="popup-header">
+    <h3>Upload File</h3>
+    <span id="closeFilePopupBtn" class="close-btn">×</span>
+  </div>
+
+  <form method="POST" action="{{ url_for('admin_upload') }}" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+    <label>File</label>
+    <input type="file" name="file" required>
+
+    <label>Description</label>
+    <input type="text" name="desc" placeholder="Short description..." required>
+
+    <div class="btn-group">
+      <button type="button" id="cancelFilePopupBtn" class="cancel-btn">Cancel</button>
+      <button type="submit" class="upload-btn">Upload</button>
+    </div>
+
+  </form>
+</div>
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> -->
+<!-- <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> -->
+<script src="{{ url_for('static', filename='script/admin-2-fileUpload.js') }}"></script>
+
+{% endblock %}

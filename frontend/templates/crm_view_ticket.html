@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Tickets</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-icons/bootstrap-icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin-6-crm.css') }}">
+</head>
+
+<body>
+<div class="crm-wrapper mt-4">
+
+  <h2 class="page-title mb-4 text-primary fw-bold">Raised Tickets</h2>
+
+    <div class="filter-box">
+
+        <select id="filter_status">
+            <option value="">Filter by Status</option>
+            <option value="Open">Open</option>
+            <option value="Viewed">Viewed</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+            <option value="Closed">Closed</option>
+        </select>
+
+        <input type="date" id="filter_start">
+        <input type="date" id="filter_end">
+
+        <button class="filter-btn" onclick="applyFilter()">Apply Filter</button>
+        <button class="clear-btn" onclick="clearFilter()">Reset</button>
+    </div>
+
+
+  {% if tickets %}
+
+  <div class="table-container">
+
+    <table class="modern-table">
+      <thead>
+        <tr>
+          <th><span class="th-flex"><strong>ID</strong><i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></span></th>
+          <th><span class="th-flex"><strong>Issue</strong><i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></span></th>
+          <th><span class="th-flex"><strong>Status</strong><i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></span></th>
+          <th><span class="th-flex"><strong>Submitted By</strong><i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></span></th>
+          <th><span class="th-flex"><strong>Date</strong><i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></span></th>
+          <th><span class="th-flex"><strong>Action</strong><i class="bi bi-arrow-up"></i><i class="bi bi-three-dots-vertical"></i></span></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for t in tickets %}
+        <tr>
+          <td>{{ t.id }}</td>
+          <td>{{ t.issue }}</td>
+          <td>
+            {% if t.status %}
+              {{ t.status }}
+            {% else %}
+              New
+            {% endif %}
+          </td>
+          <td>{{ t.name }} ({{ t.email }})</td>
+          <td>{{ t.created_at }}</td>
+          <td>
+            <a href="{{ url_for('admin_view_single_ticket', ticket_id=t.id) }}" class="btn-view">View</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+    <div class="pagination-bar">
+        Rows per page:
+        <select name="" id="" disabled><option value="">50</option></select>
+        <span>1-{{ tickets | length }} of {{ tickets|length }}</span>
+        <span class="pagination-arrows"></span>
+    </div>
+    </div>
+    <!-- { % else % }
+    <p class="text-muted mt-3">No tickets raised yet.</p> -->
+     {% endif %}
+     <a href="{{ url_for('admin_crm') }}" class="back-list mt-3">Back</a>
+     </div>
+
+  <script>
+
+    function applyFilter() {
+        const params = new URLSearchParams();
+
+        // let issue = document.getElementById("filter_issue").value;
+        let status = document.getElementById("filter_status").value;
+        let start = document.getElementById("filter_start").value;
+        let end = document.getElementById("filter_end").value;
+
+        // if (issue) params.append("issue", issue);
+        if (status) params.append("status", status);
+        if (start) params.append("start", start);
+        if (end) params.append("end", end);
+
+        window.location.href = "/admin/crm/view_ticket?" + params.toString();
+    }
+
+    function clearFilter() {
+        window.location.href = "/admin/crm/view_ticket";
+    }
+
+
+
+  </script>
+
+     </body>
+     </html>

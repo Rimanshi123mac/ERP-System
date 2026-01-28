@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Admin Panel{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-icons/bootstrap-icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin_profile.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
+  {% block head_extra %}{% endblock %}
+</head>
+
+<!-- KEY: .main-wrapper CLASS + THEME CLASS ON BODY -->
+<body class="main-wrapper theme-{{ user_prefs.theme|default('light') }}{% if user_prefs.is_bold %} font-bold{% endif %}"
+      data-theme="{{ user_prefs.theme|default('light') }}"
+      data-font="{{ user_prefs.font_family|default('Poppins') }}"
+      data-size="{{ user_prefs.font_size|default('16px') }}"
+      data-bold="{{ 1 if user_prefs.is_bold else 0 }}"
+      style="--font-family: {{ user_prefs.font_family|default('Poppins') }}; --font-size: {{ user_prefs.font_size|default('16px') }};">
+
+<div class="layout">
+  {% include "admin_sidebar.html" %}
+  
+  <div class="main-content-wrapper">
+    <header class="topbar">
+      <h2 class="page-title">
+        {% block page_title %}Dashboard{% endblock %}
+      </h2>
+      <div class="topbar-right">
+        <div class="avatar-global" onclick="toggleProfileMenu()">
+          {{ session.admin_name[0]|upper if session.admin_name else 'A' }}
+        </div>
+        
+        <div id="profileDropdown" class="profile-dropdown">
+          <a href="{{ url_for('admin_profile') }}">
+            <i class="bi bi-person"></i> Profile
+          </a>
+          <a href="{{ url_for('logout') }}" class="logout">
+            <i class="bi bi-box-arrow-right"></i> Logout
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-content">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleProfileMenu() {
+  const dropdown = document.getElementById("profileDropdown");
+  dropdown.classList.toggle("show");
+}
+
+document.addEventListener("click", (e) => {
+  const avatar = document.querySelector(".avatar-global");
+  const dropdown = document.getElementById("profileDropdown");
+  
+  if (avatar && dropdown) {
+    if (!avatar.contains(e.target)) {
+      dropdown.classList.remove("show");
+    }
+  }
+});
+</script>
+
+</body>
+</html>

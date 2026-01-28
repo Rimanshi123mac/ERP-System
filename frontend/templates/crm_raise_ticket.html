@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raise a ticket</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='crm_raise_ticket.css')}}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Raise a ticket</h2>
+        {% if success %}
+            <div class="alert success">
+                Your ticket has been submitted successfully!
+            </div>
+        {% endif %}
+        <form action="/backend/uploads/" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <input type="text" name="desc" placeholder="File Description" >
+            <div class="mb-3">
+                <label for="">Name</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="">Email</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Issue Type</label>
+                <input type="text" name="issue" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Details</label>
+                <textarea name="details" class="form-control" rows="4" id="" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Tickets</button>
+
+        </form>
+
+        <a href="{{ url_for('admin_crm') }}" class="btn btn-link mt-3">Back</a>
+        <script src="{{ url_for('static', filename='script/crm_raise_ticket.js') }}"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin File Upload</title>
+    <link rel="stylesheet" href="/frontend/static/a.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Admin File Upload</h2>
+
+        <form action="{{url for('upload_file') }}" method="POST" enctype="multipart/form-data" class="upload-form">
+            <input type="file" name="file" required>
+            <input type="text" name="desc" placeholder="Enter description" required>
+            <button type="submit">Upload</button>
+      </form>
+
+      <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Desc</th>
+                <th>File Name</th>
+                <th>Public</th>
+                <th>Uploaded By</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+             {% for i, file in enumerate(files, start=1) %}
+        <tr>
+          <td>{{ i }}</td>
+          <td>{{ file['desc'] }}</td>
+          <td>{{ file['name'] }}</td>
+          <td>
+            {% if file['public'] %}
+              ✅
+            {% else %}
+              ❌
+            {% endif %}
+          </td>
+          <td>{{ file['uploaded_by'] }}</td>
+          <td>
+            <a href="{{ url_for('download_file', filename=file['name']) }}">Download</a> |
+            <a href="{{ url_for('delete_file', filename=file['name']) }}">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</body>
+</html>

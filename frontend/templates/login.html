@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='popup.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="login-box animated">
+        <img src="{{ url_for('static', filename='images/N_logo.png') }}" class="login-logo" alt="Logo">
+
+        <h2 class="title">Welcome to NishGrid</h2>
+
+        <form id="loginForm">
+
+            <div class="input-group">
+                <input type="text" id="username" required>
+                <label>Username</label>
+            </div>
+
+            <div class="input-group password-group">
+                <input type="password" id="password" required>
+                <label>Password</label>
+                <span class="toggle-password" onclick="togglePassword()">Show</span>
+            </div>
+
+            <div class="captcha-section">
+                <div class="captcha-box">
+                    <img src="/captcha" id="captchaImg" alt="captcha">
+                    <button type="button" class="reload-btn" onclick="reloadCaptcha()">↻</button>
+                </div>
+                <input type="text" id="captchaInput" placeholder="Enter CAPTCHA" required>
+            </div>
+
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <p class="extra-links">
+            <a href="#">Forgot Password?</a> | 
+            <a href="{{ url_for('register_page') }}">New user? Register here</a>
+        </p>
+
+    </div>
+
+    <footer>
+        Copyright © 2025
+        <a href="https://nishgrid.com" target="_blank"> NishGrid Technologies</a>
+    </footer>
+
+</div>
+
+<!-- OTP -->
+<!-- <div id="otpModal" class="otp-modal hidden">
+    <div class="otp-box">
+        <button class="close-btn" onclick="closeOtpModal()">✖</button>
+
+        <h3>Email Verification Required</h3>
+        <p id="otpMessage">Click below to receive OTP</p>
+
+        <button id="sendOtpBtn" class="otp-btn">Send OTP</button>
+
+        <div id="otpVerifySection" class="hidden">
+            <input type="text" id="otpInput" maxlength="6" class="otp-input" placeholder="Enter OTP">
+            <button id="verifyOtpBtn" class="verify-btn">Verify OTP</button>
+        </div>
+    </div>
+</div> -->
+
+
+<!-- OTP MODAL -->
+<div id="otpModal" class="otp-overlay hidden">
+  <div class="otp-modal">
+
+    <button class="otp-close" onclick="closeOtpModal()">✖</button>
+
+    <h3>Email Verification</h3>
+    <p id="otpMessage">Click below to receive OTP</p>
+
+    <button id="sendOtpBtn" class="otp-btn">Send OTP</button>
+
+    <div id="otpVerifySection" class="hidden">
+      <input
+        type="text"
+        id="otpInput"
+        maxlength="6"
+        placeholder="Enter OTP"
+        class="otp-input"
+      >
+      <button id="verifyOtpBtn" class="otp-btn">
+        Verify OTP
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div id="globalPopup" class="popup-overlay">
+  <div class="popup-box">
+
+    <button class="popup-close" id="popupClose">&times;</button>
+    <div class="popup-content" id="popupMessage">Message goes here</div>
+
+    <div class="popup-actions" id="popupActions" style="display:none;">
+      <button class="btn-cancel" onclick="hidePopup()">Cancel</button>
+      <button class="btn-confirm" id="popupConfirmBtn">Logout</button>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- <div id="globalPopup" class="popup-overlay">
+  <div class="popup-box">
+    <button class="popup-close" id="popupClose">&times;</button>
+    <div class="popup-content" id="popupMessage">Message goes here</div>
+  </div>
+</div> -->
+
+<!-- <script src="{{ url_for('static', filename='script/client_theme.js') }}"></script> -->
+<script src="{{ url_for('static', filename='script/client_theme.js') }}"></script>
+<script src="{{ url_for('static', filename='script/login.js') }}"></script>
+
+</body>
+</html>

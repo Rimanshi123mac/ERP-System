@@ -1,0 +1,73 @@
+{% extends "layouts/client_base.html" %}
+
+{% block page_title %}CRM{% endblock %}
+
+{% block content %}
+<div class="crm-page">
+
+  <div class="crm-topbar">
+    <div class="crm-title">CRM</div>
+  </div>
+
+  <div class="crm-table-wrapper">
+    <table class="crm-table">
+      <thead>
+        <tr>
+          <th><span class="th-flex"><strong>#</strong>
+        <i class="bi bi-arrow-up"></i>
+        <i class="bi bi-three-dots-vertical"></i>
+      </span></th>
+          <th><span class="th-flex"><strong>Name</strong>
+        <i class="bi bi-arrow-up"></i>
+        <i class="bi bi-three-dots-vertical"></i>
+      </span></th>
+          <th>span class="th-flex"><strong>City</strong>
+        <i class="bi bi-arrow-up"></i>
+        <i class="bi bi-three-dots-vertical"></i>
+      </span></th>
+          <th>span class="th-flex"><strong>Mob</strong>
+        <i class="bi bi-arrow-up"></i>
+        <i class="bi bi-three-dots-vertical"></i>
+      </span></th>
+          <th>span class="th-flex"><strong>Status</strong>
+        <i class="bi bi-arrow-up"></i>
+        <i class="bi bi-three-dots-vertical"></i>
+      </span></th>
+          <th><span class="th-flex"><strong>Priority</strong>
+        <i class="bi bi-arrow-up"></i>
+        <i class="bi bi-three-dots-vertical"></i>
+      </span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in customers %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ c.name }}</td>
+          <td>{{ c.city }}</td>
+          <td>{{ c.mobile }}</td>
+          <td>{{ c.status }}</td>
+          <td>{{ c.priority }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="6" style="text-align:center;">No customers found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+        <div class="pagination-bar">
+      Rows per page:
+      <select disabled>
+        <option>50</option>
+      </select>
+      <span>1-{{ files|length }} of {{ files|length }}</span>
+      <span class="pagination-arrows">◀ ▶</span>
+    </div>
+
+
+  </div>
+
+</div>
+{% endblock %}
